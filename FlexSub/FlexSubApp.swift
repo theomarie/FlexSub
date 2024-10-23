@@ -12,6 +12,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
+      
+      if let firebaseApp = FirebaseApp.app() {
+             print("Firebase a bien été initialisé avec \(firebaseApp.name)")
+         } else {
+             print("Échec de l'initialisation de Firebase")
+         }
     return true
   }
 }
@@ -23,7 +29,8 @@ struct FlexSubApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        ContentView()
+        //ContentView()
+          RegisterView()
       }
     }
   }

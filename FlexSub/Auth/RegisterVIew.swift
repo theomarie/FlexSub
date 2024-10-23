@@ -8,12 +8,15 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+
+
 struct RegisterView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var errorMessage: String = ""
     @State private var isShowingError = false
+    @State private var isSuccess = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -24,12 +27,8 @@ struct RegisterView: View {
                 .padding(.horizontal)
 
             SecureField("Mot de passe", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
-
             SecureField("Confirmer mot de passe", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
+                
 
             Button(action: {
                 registerUser()
@@ -37,7 +36,6 @@ struct RegisterView: View {
                 Text("S'inscrire")
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .frame(width: 200, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
             }
@@ -47,21 +45,31 @@ struct RegisterView: View {
                     .foregroundColor(.red)
                     .padding()
             }
+            
+            if isSuccess {
+                Text("Inscription réussie!")
+                    .foregroundColor(.green)
+                    .padding()
+            }
         }
+        .padding()
     }
 
-    func registerUser() {
+    private func registerUser() {
         guard password == confirmPassword else {
             errorMessage = "Les mots de passe ne correspondent pas."
             isShowingError = true
             return
         }
+        
         AuthManager.shared.registerUser(email: email, password: password) { result in
             switch result {
-            case .success(_):
-                print("Utilisateur enregistré avec succès")
+            case .success:
+                isSuccess = true
+                errorMessage = ""
             case .failure(let error):
-                print("Erreur : \(error.localizedDescription)")
+                errorMessage = "Erreur : \(error.localizedDescription)"
+                isShowingError = true
             }
         }
     }

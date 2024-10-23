@@ -13,14 +13,28 @@ class AuthManager {
     private init() {}
 
     func registerUser(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password, completion: { result, error in
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 completion(.failure(error))
-            } else if let result = result {
-                completion(.success(result))
+            } else if result != nil {
+                self.sendEmailVerification(completion: completion)
             }
-        })
+        }
     }
-    
-    
+
+    private func sendEmailVerification(completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
+          guard let user = Auth.auth().currentUser else {
+              completion(.failure(NSError(domain: "AuthManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Utilisateur non trouvé"])))
+              return
+          }
+          
+          user.sendEmailVerification { error in
+              if let error = error {
+                  completion(.failure(error))
+              } else {
+                  print("E-mail de vérification envoyé à \(user.email ?? "")")
+                  // pas de result dans sendEmailVerification TODO avertir le user
+              }
+          }
+      }
 }
