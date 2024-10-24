@@ -48,4 +48,15 @@ class AuthManager {
                 }
             }
         }
+    
+    func logout(completion: @escaping (Result<Void, Error>) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            print("Utilisateur déconnecté avec succès")
+            completion(.success(()))
+        } catch let signOutError as NSError {
+            print("Erreur lors de la déconnexion: \(signOutError)")
+            completion(.failure(signOutError))
+        }
+    }
 }
