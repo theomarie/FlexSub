@@ -1,0 +1,18 @@
+# Xcode
+DerivedData/
+build/
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+*.xcsettings
+
+# Firebase
+GoogleService-Info.plist
+
+# Pods
+Pods/
+Podfile.lock
+
+# Swift Package Manager
+/.build
+/.swiftpm/xcode/package.pins
