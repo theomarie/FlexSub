@@ -20,3 +20,5 @@ enum Category: String, Categories {
         return [.all, .cinema, .sport, .museum, .concert]
     }
 }
+
+
