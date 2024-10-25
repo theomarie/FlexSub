@@ -11,11 +11,23 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        VStack {
+        TabView {
+            Tab("Activités", systemImage: "star") {
+                // Vue Activités
+            }
             
-            Text("Hello, world!")
+            Tab("Mes annonces", systemImage: "light.panel") {
+                // Vue Mes annonces
+            }
+            
+            Tab("Messagerie", systemImage: "message.fill") {
+                // Vue Messagerie
+            }
+
+            Tab("Profil", systemImage: "person.crop.square") {
+                // Vue Profil
+            }
         }
-        .padding()
     }
 }
 
