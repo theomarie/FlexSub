@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @Bindable var authViewModel: AuthViewModel  // Lien avec le ViewModel pour gérer la déconnexion
+    @Environment(AuthViewModel.self) var authViewModel
 
     var body: some View {
         VStack {
@@ -34,5 +34,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(authViewModel: AuthViewModel())
+    ContentView()
+        .environment(AuthViewModel())
 }

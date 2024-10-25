@@ -9,8 +9,8 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-struct HomeScreen: View {
-    @State var authViewModel = AuthViewModel()
+struct AuthSecureScreen: View {
+    @Environment(AuthViewModel.self) var authViewModel: AuthViewModel
     
     
     var body: some View {
@@ -24,10 +24,10 @@ struct HomeScreen: View {
                     // Lorsque le chargement est terminé, on affiche soit la Home, soit AuthView
                     if authViewModel.isLoggedIn {
                         NavigationView {
-                            ContentView(authViewModel: authViewModel)
+                            ContentView()
                         }
                     } else {
-                        AuthView(authViewModel: authViewModel)
+                        AuthView()
                     }
                 }
             }

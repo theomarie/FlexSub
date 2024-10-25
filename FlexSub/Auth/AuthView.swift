@@ -16,8 +16,8 @@ struct AuthView: View {
     @State private var isRegistering: Bool = false
     @State private var errorMessage: String = ""
     @State private var isShowingError = false
-    //@State private var isLoggedIn = false
-    @Bindable var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
+
 
     var body: some View {
         if (authViewModel.isLoggedIn) {
@@ -85,18 +85,12 @@ struct AuthView: View {
         }
         
         private func registerUser() {
-            AuthManager.shared.registerUser(email: email, password: password)  { result in
-                switch result {
-                case .success(_):
-                    print("Utilisateur enregistré avec succès")
-                case .failure(let error):
-                    errorMessage = "Erreur : \(error.localizedDescription)"
-                    isShowingError = true
-                }
+            authViewModel.register(email: email, password: password)
             }
-        }
+        
     }
 
 #Preview {
-    AuthView(authViewModel: AuthViewModel())
+    AuthView()
+        .environment(AuthViewModel())
 }
