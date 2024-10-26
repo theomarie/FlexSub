@@ -12,9 +12,11 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(AuthViewModel.self) var authViewModel
-
     var body: some View {
         VStack {
+         
+                AddressSearchView()
+           
             Text("Hello, world!")
                 .font(.largeTitle)
                 .padding()
@@ -34,6 +36,6 @@ struct ContentView: View {
 }
 
 #Preview {
+    
     ContentView()
-        .environment(AuthViewModel())
 }

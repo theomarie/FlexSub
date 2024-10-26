@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-import SwiftUI
 
 struct Address: Identifiable {
     let id = UUID()
@@ -15,7 +14,7 @@ struct Address: Identifiable {
     let formattedAddress: String
     var state: String = ""
     let zipCode: String
-    var country: String = "France"
+    var country: String = ""
     let lng: Double
     let lat: Double
 }
