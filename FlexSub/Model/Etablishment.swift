@@ -13,3 +13,5 @@ struct Etablishement: Identifiable {
     let address: Address
     let image: Image?
 }
+
+

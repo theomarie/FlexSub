@@ -14,7 +14,7 @@ import MapKit
 struct AddressSearchView: View {
     @State private var viewModel = AddressSearchViewModel()
     @State private var query: String = ""
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -40,7 +40,7 @@ struct AddressSearchView: View {
                     .padding(.trailing, 10)
                 }
             }
-
+            
             if !viewModel.isAddressSelected {
                 List(viewModel.addresses) { address in
                     Button(action: {
@@ -59,12 +59,12 @@ struct AddressSearchView: View {
                 }
             } else {
                 if let formattedAddress = viewModel.selectedAddress?.formattedAddress {
-                                    Text("Adresse sélectionnée : \(formattedAddress)")
-                                        .font(.headline)
-                                } else {
-                                    Text("Adresse sélectionnée : Non disponible")
-                                        .font(.headline)
-                                }
+                    Text("Adresse sélectionnée : \(formattedAddress)")
+                        .font(.headline)
+                } else {
+                    Text("Adresse sélectionnée : Non disponible")
+                        .font(.headline)
+                }
             }
         }
         .padding()
