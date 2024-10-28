@@ -6,14 +6,7 @@
 //
 
 import Foundation
-
-// Enum pour les catégories d'activités
-enum ActivityCategory: String, CaseIterable {
-    case cinema = "Cinéma"
-    case sport = "Sport"
-    case museum = "Musée"
-    case concert = "Concert"
-}
+import SwiftUI
 
 // Enum pour le statut de l'activité
 enum ActivityStatus {
@@ -30,8 +23,9 @@ struct Activity: Identifiable {
     var participant: User? // Participant optionnel
     let price: Double
     let date: Date
-    let category: ActivityCategory
-    let etablissementId: Int
+    let category: Category
+    let etablissement: Etablissement // Remplacer `etablissementId` par `etablissement`
     let location: String // Lieu de l'activité
     let distance: Double // Distance par rapport à l'utilisateur (en km)
 }
+
