@@ -11,7 +11,8 @@ import SwiftUI
 
 struct ActivitiesListView: View {
     // données local sample
-    let activities: [Activity] = Activity.sampleData()
+    var activities: [Activity] = Activity.sampleData()
+    
     // ActivitiesViewModel
     // Fin Local
     

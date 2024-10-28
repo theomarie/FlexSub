@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ActivitiesView: View {
-    
+    @Environment(ActivitiesViewModel.self) var activitiesViewModel
     /*
        déclarer les listes en utilisant le ActivitiesViewModel
+     @Environment(ActivitiesViewModel.self) var activities
      */
     
     var body: some View {
@@ -22,15 +23,17 @@ struct ActivitiesView: View {
                 */
             
             SearchableActivitiesView()
-            ActivitiesListView()
+            ActivitiesListView(activities: activitiesViewModel.activities)
             
         }
     }
 }
 
 #Preview {
+    
     NavigationStack() {
         ActivitiesView()
+            .environment(ActivitiesViewModel())
     }
  
 }
