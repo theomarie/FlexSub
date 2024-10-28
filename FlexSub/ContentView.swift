@@ -8,17 +8,36 @@
 import SwiftUI
 
 
+
+
 struct ContentView: View {
-    
+    @Environment(AuthViewModel.self) var authViewModel
     var body: some View {
-        VStack {
+        TabView {
+            Tab("Activités", systemImage: "star") {
+                NavigationStack() {
+                    ActivitiesView()
+                }
+            }
             
-            Text("Hello, world!")
+            Tab("Mes annonces", systemImage: "light.panel") {
+                // Vue Mes annonces
+            }
+            
+            Tab("Messagerie", systemImage: "message.fill") {
+                // Vue Messagerie
+            }
+
+            Tab("Profil", systemImage: "person.crop.square") {
+                Button("Logout") {
+                    authViewModel.logout()
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
+    
     ContentView()
 }
