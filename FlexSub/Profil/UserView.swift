@@ -8,47 +8,65 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct UserView: View {
-    @ObservedObject var userData = UserData() 
+    @StateObject var userData = UserData() 
     @State private var isEditing = false
 
     var body: some View {
         NavigationView {
-            VStack {
+            HStack {
+                
                 if let picture = userData.user.picture {
                     Image(uiImage: picture)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 150, height: 150)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .frame(minWidth: 100, maxWidth: 200)
+                        .shadow(radius: 7)
+                } else {
+                    Image(systemName: "person.circle") // Image par défaut
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 4))
+                        .frame(minWidth: 100, maxWidth: 150)
                         .shadow(radius: 7)
                 }
 
-                Text(userData.user.username)
-                    .font(.title)
-                Text(userData.user.email)
-                    .font(.subheadline)
-                Text("\(userData.user.firstName) \(userData.user.lastName)")
-                    .font(.headline)
-                Text(userData.user.address)
-                    .font(.subheadline)
-                Spacer()
-            }
-            .navigationTitle("Profil")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isEditing = true
-                    }) {
-                        Image(systemName: "pencil")
+                VStack {
+                    Text(userData.user.username)
+                        .font(.title)
+                    Text(userData.user.email)
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                   
+                }
+                .navigationTitle("Profil")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            isEditing = true
+                        }) {
+                            Image(systemName: "pencil")
+                        }
                     }
+                }
+                .padding()
+                .sheet(isPresented: $isEditing) {
+                    UserEditFormView(user: $userData.user)
+                        .environmentObject(userData)
                 }
             }
             .padding()
-            .sheet(isPresented: $isEditing) {
-                UserEditFormView(user: $userData.user, inputImage: $userData.inputImage) 
-            }
         }
     }
+}
+
+
+#Preview {
+    UserView()
 }

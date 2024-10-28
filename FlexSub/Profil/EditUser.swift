@@ -8,34 +8,37 @@
 import SwiftUI
 
 struct UserEditFormView: View {
+    
     @Binding var user: User
-    @Binding var inputImage: UIImage?
+    @EnvironmentObject var userData: UserData // Accès à userData
     @Environment(\.dismiss) var dismiss
     @State private var showImagePicker = false
-
+    
     var body: some View {
         
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-
+            
             VStack {
-                if let image = inputImage {
+                if let image = userData.inputImage {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 150, height: 150)
+                        
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 8))
                         .shadow(radius: 10)
-                        .onTapGesture {
+                        .onTapGesture{
                             showImagePicker = true
                         }
+                
+                        
                 } else {
                     Image(systemName: "person.circle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 150, height: 150)
+                        
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.gray, lineWidth: 4))
                         .shadow(radius: 7)
@@ -43,7 +46,7 @@ struct UserEditFormView: View {
                             showImagePicker = true
                         }
                 }
-
+                
                 TextField("Nom d'utilisateur", text: $user.username)
                     .padding()
                     .background(Color.white)
@@ -80,8 +83,9 @@ struct UserEditFormView: View {
                     .cornerRadius(12)
                     .shadow(radius: 3)
                     .padding(.bottom, 10)
-
+                
                 Button(action: {
+                    saveChanges() 
                     dismiss()
                 }) {
                     Text("Enregistrer")
@@ -96,9 +100,13 @@ struct UserEditFormView: View {
                 .padding(.top, 20)
             }
             .padding()
-//            .sheet(isPresented: $showImagePicker) {
-//                ImagePicker(image: $inputImage) 
-//            }
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $userData.inputImage)
+            }
         }
+    }
+    
+    func saveChanges() {
+        user.picture = userData.inputImage
     }
 }
