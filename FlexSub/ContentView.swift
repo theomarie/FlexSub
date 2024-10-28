@@ -22,7 +22,7 @@ struct ContentView: View {
             
             Tab("Mes annonces", systemImage: "light.panel") {
                 NavigationStack() {
-                    
+                    MyAddsView()
                 }
             }
             

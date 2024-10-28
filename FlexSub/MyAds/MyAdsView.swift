@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyAddsView: View {
+struct MyAdsView: View {
     
 /*
 Variable pour le test d'affichage conditionnel.
@@ -52,5 +52,5 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
     }
 
 #Preview {
-    MyAddsView()
+    MyAdsView()
 }
