@@ -13,24 +13,24 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AuthViewModel.self) var authViewModel
     var body: some View {
-        VStack {
-         
-                AddressSearchView()
-           
-            Text("Hello, world!")
-                .font(.largeTitle)
-                .padding()
-
-            Button(action: {
-                authViewModel.logout()  // Appel de la méthode de déconnexion
-            }) {
-                Text("Se déconnecter")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.red)
-                    .cornerRadius(8)
+        TabView {
+            Tab("Activités", systemImage: "star") {
+                // Vue Activités
             }
-            .padding()
+            
+            Tab("Mes annonces", systemImage: "light.panel") {
+                // Vue Mes annonces
+            }
+            
+            Tab("Messagerie", systemImage: "message.fill") {
+                // Vue Messagerie
+            }
+
+            Tab("Profil", systemImage: "person.crop.square") {
+                Button("Logout") {
+                    authViewModel.logout()
+                }
+            }
         }
     }
 }
