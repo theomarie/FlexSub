@@ -11,7 +11,9 @@ import SwiftUI
 
 
 struct ContentView: View {
+    // environnement de mon activites
     @Environment(AuthViewModel.self) var authViewModel
+
     var body: some View {
         TabView {
             Tab("Activités", systemImage: "star") {
@@ -21,7 +23,9 @@ struct ContentView: View {
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                // Vue Mes annonces
+                NavigationStack() {
+                    MyAdsView()
+                }
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
@@ -34,10 +38,13 @@ struct ContentView: View {
                 }
             }
         }
+       
+        .environment(ActivitiesViewModel())
     }
 }
 
 #Preview {
-    
+  
     ContentView()
+     
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyAddsView: View {
+struct MyAdsView: View {
     
 /*
 Variable pour le test d'affichage conditionnel.
@@ -18,18 +18,25 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
     @State var showAddingField: Bool = false
     
     var body: some View {
-        NavigationStack{
-            
             VStack{
                 if count == 0{
-                    Text("Partagez une activité")
+                    Text("Vous trouverez ici le détail des activités que vous avez partagées.\n\nPartagez une nouvelle activité en appuyant sur le ")
+                        .font(.title3)
+                    
+                    + Text(Image(systemName: "plus"))
+                        .foregroundStyle(.blue)
+                        .font(.title3)
+                    
+                    + Text(" en haut à droite.")
+                        .font(.title3)
+        
+                    Spacer()
+                    
                 } else {
-                    Form{
-                        Text("Annonce 1")
-                        Text("Annonce 2")
-                    }
+                    // Affichage des activités
                 }
             }
+            .padding(32)
             .navigationTitle("Mes activités")
             .toolbar {
                 Button {
@@ -43,8 +50,10 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
             }
         }
     }
-}
 
 #Preview {
-    MyAddsView()
+    NavigationStack {
+        MyAdsView()
+    }
+
 }

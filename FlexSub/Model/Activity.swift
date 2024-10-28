@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct Activity: Identifiable {
-    let id = UUID()
+    let id:  String
     var title: String
     var status: Status = .published
-    var owner: User.ID
+    //var owner: User.ID
+    var ownerId: String
     var participant: User.ID?
     var price: Double = 0
     var date: Date
