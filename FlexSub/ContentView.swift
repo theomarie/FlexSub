@@ -8,8 +8,10 @@
 import SwiftUI
 
 
+
+
 struct ContentView: View {
-    
+    @Environment(AuthViewModel.self) var authViewModel
     var body: some View {
         TabView {
             Tab("Activités", systemImage: "star") {
@@ -32,5 +34,6 @@ struct ContentView: View {
 }
 
 #Preview {
+    
     ContentView()
 }

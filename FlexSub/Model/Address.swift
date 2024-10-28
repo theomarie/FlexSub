@@ -5,8 +5,7 @@
 //  Created by apprenant103 on 24/10/2024.
 //
 import SwiftUI
-
-import SwiftUI
+import MapKit
 
 struct Address: Identifiable {
     let id = UUID()
@@ -15,9 +14,21 @@ struct Address: Identifiable {
     let formattedAddress: String
     var state: String = ""
     let zipCode: String
-    var country: String = "France"
+    var country: String = ""
     let lng: Double
     let lat: Double
+    
+    // Propriété calculée pour obtenir la coordonnée CLLocationCoordinate2D
+       var coordinate: CLLocationCoordinate2D {
+           return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+       }
+       
+       // Propriété calculée pour obtenir l'emplacement MKMapItem
+       var mapItem: MKMapItem {
+           let placemark = MKPlacemark(coordinate: coordinate)
+           return MKMapItem(placemark: placemark)
+       }
+    
 }
 
 
