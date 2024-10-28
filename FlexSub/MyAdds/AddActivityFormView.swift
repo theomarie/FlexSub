@@ -13,11 +13,12 @@ struct AddActivityFormView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var title: String = ""
-    @State private var price: Double = 0
+    @State private var price: String = ""
     @State private var date = Date()
     @State private var location : String = ""
     
     var body: some View {
+        
         
         Form{
             Section{
@@ -28,36 +29,44 @@ struct AddActivityFormView: View {
                     .foregroundStyle(.blue)
             }
             
+            
             Section {
-                DatePicker("Date de début", selection: $date)
+                 DatePicker("Date de début", selection: $date)
+            } header: {
+                Text("Début de l'activité")
+                    .foregroundStyle(.blue)
             }
             
             Section{
                 HStack{
-                    TextField("Prix", value: $price, format: .number)
+                    // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
+                    TextField("0", text: $price)
+                    
+                    // Si price est un Double
+                    //TextField("Prix", value: $price, format: .number)
+
                     Spacer()
                     Text("€")
                 }
+            } header: {
+                Text("Prix")
+                    .foregroundStyle(.blue)
+            }
+
+            Section{
+                AddressSearchView()
+            } header: {
+                Text("Lieu")
+                    .foregroundStyle(.blue)
             }
             
-            
             Section{
-                HStack{
-                    Image(systemName: "location")
-                        .foregroundStyle(.tertiary)
-                   // TextField("Lieu de l'établissement", text: )
-                     //   .italic()
-                }
-            }
-            
-            Section{
-                Button("Ajouter une nouvelle activité")
-                {
-                    // Attention model Activity modifs
-//                    let newActivity = Activity(title: title, owner: Auth.auth().currentUser?.uid, date: date)
+                ValidationButtonView(text: "Ajouter une activité") {
+                    //
                     dismiss()
                 }
             }
+          //  .listRowBackground(Color.clear)
         }
     }
 }

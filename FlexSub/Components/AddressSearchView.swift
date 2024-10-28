@@ -17,7 +17,11 @@ struct AddressSearchView: View {
     
     var body: some View {
         VStack {
+              
             HStack {
+                Image(systemName: "location")
+                    .foregroundStyle(.tertiary)
+                
                 TextField("Rechercher une adresse", text: $query)
                     .onChange(of: query) { newValue, arguments in
                         if newValue.count > 2 { // Commence la recherche après 3 caractères
@@ -25,8 +29,8 @@ struct AddressSearchView: View {
                         } else {
                             viewModel.addresses = []
                         }
-                    }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    } 
+                   // .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 // Bouton pour supprimer l'adresse sélectionnée
                 if viewModel.isAddressSelected {
@@ -71,4 +75,13 @@ struct AddressSearchView: View {
     }
     
     
+}
+
+
+#Preview {
+    AddressSearchView()
+}
+
+#Preview {
+    AddActivityFormView()
 }
