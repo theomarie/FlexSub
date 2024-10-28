@@ -27,7 +27,9 @@ struct ContentView: View {
             }
 
             Tab("Profil", systemImage: "person.crop.square") {
-                // Vue Profil
+                Button("Logout") {
+                    authViewModel.logout()
+                }
             }
         }
     }
