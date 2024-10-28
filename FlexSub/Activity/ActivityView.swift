@@ -5,7 +5,7 @@ struct ActivityView: View {
 
     var body: some View {
         HStack {
-            // Affichage de l'image de l'établissement
+            
             if let image = activity.etablissement.image {
                 image
                     .resizable()
@@ -15,11 +15,11 @@ struct ActivityView: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                // Titre de l'activité et heure de la séance à droite
+              
                 HStack {
                     Text(activity.title)
                         .font(.headline)
-                    Spacer() // Permet de placer l'heure tout à droite
+                    Spacer()
                     Text(formatDate(activity.date))
                         .font(.subheadline)
                         .foregroundColor(.white)
@@ -29,17 +29,17 @@ struct ActivityView: View {
                         .cornerRadius(10)
                 }
 
-                // Nom de l'établissement
+              
                 Text(activity.etablissement.name)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
-                // Adresse de l'établissement et prix aligné à droite
+               
                 HStack {
                     Text("\(activity.etablissement.address.street), \(activity.etablissement.address.city) \(activity.etablissement.address.postalCode)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Spacer() // Espace flexible pour aligner le prix à droite
+                    Spacer()
                     Text("\(String(format: "%.2f", activity.price))€")
                         .font(.headline)
                         .fontWeight(.bold)
@@ -49,10 +49,10 @@ struct ActivityView: View {
         .padding(.vertical, 8)
     }
 
-    // Fonction pour formater l'heure
+    
     func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm" // Format d'affichage de l'heure
+        formatter.dateFormat = "HH:mm" 
         return formatter.string(from: date)
     }
 }
