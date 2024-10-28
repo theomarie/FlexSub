@@ -5,12 +5,14 @@
 //  Created by Theo Marie on 23/10/2024.
 //
 
-enum Category: String, Categories {
+enum Category: String,CaseIterable, Identifiable, Categories {
     case all = "Tous"
     case cinema = "Cinéma"
     case sport = "Sport"
     case museum = "Musée"
     case concert = "Concert"
+    
+    var id: String { self.rawValue }
 
     var name: String {
         return self.rawValue
