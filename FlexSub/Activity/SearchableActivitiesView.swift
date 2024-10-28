@@ -3,16 +3,15 @@ import SwiftUI
 struct SearchableActivitiesView: View {
     @State private var selectedCategory: Category = .all
     @State private var searchText: String = ""
-
+    @State var activitiesViewModel = ActivitiesViewModel()
   
     var filteredActivities: [Activity] {
-        activities.filter { activity in
+        activitiesViewModel.activities.filter { activity in
             
             (selectedCategory == .all || activity.category == selectedCategory) &&
             
             (searchText.isEmpty ||
-             activity.title.lowercased().contains(searchText.lowercased()) ||
-             activity.etablissement.name.lowercased().contains(searchText.lowercased()))
+             activity.title.lowercased().contains(searchText.lowercased()))
         }
     }
 
@@ -36,7 +35,7 @@ struct SearchableActivitiesView: View {
 
         
             List(filteredActivities) { activity in
-                ActivityView(activity: activity)
+                ActivityRow(activity: activity)
             }
             .listStyle(PlainListStyle())
         }
@@ -45,6 +44,9 @@ struct SearchableActivitiesView: View {
 }
 
 
+
+
 #Preview {
-    SearchableActivitiesView()
+    let activitiesViewModel = ActivitiesViewModel()
+    SearchableActivitiesView(activitiesViewModel: activitiesViewModel)
 }

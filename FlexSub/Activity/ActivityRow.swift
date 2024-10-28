@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct ActivityView: View {
+struct ActivityRow: View {
     var activity: Activity
 
     var body: some View {
         HStack {
-            
+            /*
             if let image = activity.etablissement.image {
                 image
                     .resizable()
@@ -13,6 +13,7 @@ struct ActivityView: View {
                     .frame(width: 60, height: 60)
                     .cornerRadius(8)
             }
+             */
 
             VStack(alignment: .leading, spacing: 4) {
               
@@ -30,13 +31,13 @@ struct ActivityView: View {
                 }
 
               
-                Text(activity.etablissement.name)
+                Text(activity.address.streetAddress)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
                
                 HStack {
-                    Text("\(activity.etablissement.address.street), \(activity.etablissement.address.city) \(activity.etablissement.address.postalCode)")
+                    Text(activity.address.formattedAddress)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     Spacer()
@@ -69,16 +70,13 @@ let ownerUser = User(
 let cinemaActivity = Activity(
     title: "Terrifier 3",
     status: .published,
-    owner: ownerUser,
-    participant: nil,
+    owner: ownerUser.id,
     price: 10.50,
     date: Date(),
     category: .cinema,
-    etablissement: etablissementPathe,
-    location: "Cinéma Pathé, Paris",
-    distance: 2.5
+    address: Address(streetAddress: "Pathé Joliette", city: "Marseillle", formattedAddress: "Pathé Joliette, Marseillle - 13000 Marseille", zipCode: "13002", lng: 46.0551, lat: 43.3123055)
 )
 
 #Preview {
-    ActivityView(activity: cinemaActivity)
+    ActivityRow(activity: cinemaActivity)
 }

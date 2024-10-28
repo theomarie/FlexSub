@@ -7,7 +7,11 @@
 
 import Foundation
 
-@Observable class Catalog {
+@Observable class ActivitiesViewModel {
     var activities : [Activity] = []
+    
+  
+    
+    
 }
 
