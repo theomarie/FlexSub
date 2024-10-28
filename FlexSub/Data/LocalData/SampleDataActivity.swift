@@ -21,14 +21,14 @@ extension Activity {
                          date: Date(),
                          category: .sport,
                          address: Address(
-                             streetAddress: "123 Main St",
-                             city: "Paris",
-                             formattedAddress: "123 Main St, Paris, France",
-                             state: "Ile-de-France",
-                             zipCode: "75001",
+                             streetAddress: "Basic-Fit Marseille Avenue de la Capelette II",
+                             city: "Marseille",
+                             formattedAddress: "Basic-Fit Marseille Avenue de la Capelette II, Marseille, France",
+                             state: "Auvergne-Rhône-Alpes",
+                             zipCode: "13010",
                              country: "France",
-                             lng: 2.3522,
-                             lat: 48.8566
+                             lng: 5.4066515,
+                             lat: 43.2805138
                          )
                      ),
                      Activity(
@@ -39,14 +39,14 @@ extension Activity {
                          date: Date().addingTimeInterval(86400), // Activité le lendemain
                          category: .cinema,
                          address: Address(
-                             streetAddress: "456 Elm St",
-                             city: "Lyon",
-                             formattedAddress: "456 Elm St, Lyon, France",
+                             streetAddress: "Pathé la joliette",
+                             city: "Marseille",
+                             formattedAddress: "54, rue de Chanterac, Marseille, France",
                              state: "Auvergne-Rhône-Alpes",
-                             zipCode: "69000",
+                             zipCode: "13002",
                              country: "France",
-                             lng: 4.8357,
-                             lat: 45.764
+                             lng:  5.3677639,
+                             lat: 43.3123055
                          )
                      ),
                      Activity(
@@ -57,15 +57,15 @@ extension Activity {
                          date: Date().addingTimeInterval(86400), // Activité le lendemain
                          category: .cinema,
                          address: Address(
-                             streetAddress: "456 Elm St",
-                             city: "Lyon",
-                             formattedAddress: "456 Elm St, Lyon, France",
-                             state: "Auvergne-Rhône-Alpes",
-                             zipCode: "69000",
-                             country: "France",
-                             lng: 4.8357,
-                             lat: 45.764
-                         )
+                            streetAddress: "Pathé la joliette",
+                            city: "Marseille",
+                            formattedAddress: "54, rue de Chanterac, Marseille, France",
+                            state: "Auvergne-Rhône-Alpes",
+                            zipCode: "13002",
+                            country: "France",
+                            lng:  5.3677639,
+                            lat: 43.3123055
+                        )
                      ),
                  ]
          

@@ -9,6 +9,7 @@ enum Brand: String, CaseIterable {
     case basicFit = "Basic fit"
     case pathe = "Pathé"
     case ugc = "UGC"
+    case jeuxdepomme = "Jeux de peaume"
     
     var logo: String {
         switch self {
@@ -18,6 +19,8 @@ enum Brand: String, CaseIterable {
             return "pathe_logo"
         case .ugc:
             return "ugc_logo"
+        case .jeuxdepomme:
+            return "jeux_de_pomme_logo"
         }
     }
     

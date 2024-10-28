@@ -17,6 +17,7 @@ class User: Identifiable {
     var lastName: String?
     var picture: UIImage?
     var address: String?
+    var image: Image?
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
     
     
@@ -40,7 +41,6 @@ class User: Identifiable {
         self.lastName = lastName
         self.picture = picture
         self.address = address
-       // self.phone = phone
     }
     
     
