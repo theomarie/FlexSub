@@ -15,10 +15,8 @@ struct Address: Identifiable {
     var state: String = ""
     let zipCode: String
     var country: String = ""
-    
     let lng: Double
     let lat: Double
-    
     
     // Propriété calculée pour obtenir la coordonnée CLLocationCoordinate2D
        var coordinate: CLLocationCoordinate2D {
@@ -30,6 +28,7 @@ struct Address: Identifiable {
            let placemark = MKPlacemark(coordinate: coordinate)
            return MKMapItem(placemark: placemark)
        }
+    
 }
 
 

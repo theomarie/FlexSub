@@ -32,7 +32,7 @@ import Combine
             guard let mapItems = response?.mapItems else { return }
             self?.addresses = mapItems.map { mapItem in
                 Address(
-                    company: mapItem.placemark.name ?? "Inconnu",
+                    streetAddress: mapItem.placemark.name ?? "Inconnu",
                     city: mapItem.placemark.locality ?? "Inconnu",
                     formattedAddress: mapItem.placemark.title ?? "Inconnu",
                     state: mapItem.placemark.administrativeArea ?? "",
