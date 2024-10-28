@@ -52,5 +52,8 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
     }
 
 #Preview {
-    MyAdsView()
+    NavigationStack {
+        MyAdsView()
+    }
+
 }
