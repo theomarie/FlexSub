@@ -16,7 +16,7 @@ struct ContentView: View {
         TabView {
             Tab("Activités", systemImage: "star") {
                 NavigationStack() {
-                  
+                    ActivitiesView()
                 }
             }
             

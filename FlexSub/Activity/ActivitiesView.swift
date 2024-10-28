@@ -29,5 +29,8 @@ struct ActivitiesView: View {
 }
 
 #Preview {
-    ActivitiesView()
+    NavigationStack() {
+        ActivitiesView()
+    }
+ 
 }
