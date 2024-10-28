@@ -5,7 +5,7 @@
 //  Created by Theo Marie on 26/10/2024.
 //
 
-enum Brand: String {
+enum Brand: String, CaseIterable {
     case basicFit = "Basic fit"
     case pathe = "Pathé"
     case ugc = "UGC"

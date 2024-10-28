@@ -5,16 +5,21 @@ struct ActivityRow: View {
 
     var body: some View {
         HStack {
-            /*
-            if let image = activity.etablissement.image {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(8)
-            }
-             */
-
+            // Affiche le logo : ressource || SF Symbol
+                       if let uiImage = UIImage(named: activity.logo) {
+                           Image(uiImage: uiImage)
+                               .resizable()
+                               .scaledToFit()
+                               .frame(width: 60, height: 60) // voir comment ne pas mettre la taille de l'image en dur
+                               .cornerRadius(8)
+                       } else {
+                           Image(systemName: activity.logo) // Utilise SF Symbol
+                               .resizable()
+                               .scaledToFit()
+                               .frame(width: 60, height: 60) // Possible reduire le code logique
+                               .cornerRadius(8)
+                       }
+             
             VStack(alignment: .leading, spacing: 4) {
               
                 HStack {
@@ -80,3 +85,15 @@ let cinemaActivity = Activity(
 #Preview {
     ActivityRow(activity: cinemaActivity)
 }
+
+
+/*/
+ 
+ if let image = . {
+     image
+         .resizable()
+         .scaledToFit()
+         .frame(width: 60, height: 60)
+         .cornerRadius(8)
+ }
+ */
