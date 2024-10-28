@@ -52,7 +52,10 @@ struct AddActivityFormView: View {
                 Text("Prix")
                     .foregroundStyle(.blue)
             }
-
+            
+           
+            
+            
             Section{
                 AddressSearchView()
             } header: {

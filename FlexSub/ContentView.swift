@@ -15,11 +15,15 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Activités", systemImage: "star") {
-                // Vue Activités
+                NavigationStack() {
+                    ActivitiesView()
+                }
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                // Vue Mes annonces
+                NavigationStack() {
+                    
+                }
             }
             
             Tab("Messagerie", systemImage: "message.fill") {

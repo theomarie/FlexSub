@@ -18,8 +18,6 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
     @State var showAddingField: Bool = false
     
     var body: some View {
-        NavigationStack{
-            
             VStack{
                 if count == 0{
                     Text("Vous trouverez ici le détail des activités que vous avez partagées.\n\nPartagez une nouvelle activité en appuyant sur le ")
@@ -52,7 +50,6 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
             }
         }
     }
-}
 
 #Preview {
     MyAddsView()

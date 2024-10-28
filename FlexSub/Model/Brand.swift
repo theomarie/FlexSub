@@ -5,10 +5,11 @@
 //  Created by Theo Marie on 26/10/2024.
 //
 
-enum Brand: String {
+enum Brand: String, CaseIterable {
     case basicFit = "Basic fit"
     case pathe = "Pathé"
     case ugc = "UGC"
+    case jeuxdepomme = "Jeux de peaume"
     
     var logo: String {
         switch self {
@@ -18,6 +19,8 @@ enum Brand: String {
             return "pathe_logo"
         case .ugc:
             return "ugc_logo"
+        case .jeuxdepomme:
+            return "jeux_de_pomme_logo"
         }
     }
     
