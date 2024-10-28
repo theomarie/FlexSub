@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var userData = UserData() 
+
     var body: some View {
-        NavigationStack{
-            TabView {
-                UserView()
-                    .tabItem {
-                        Label("Profil", systemImage: "list.dash")
-                    }
-            }
-        }
+        UserView()
+            .environmentObject(userData)
     }
 }
    

@@ -17,6 +17,7 @@ class User: Identifiable {
     var lastName: String
     var picture: UIImage?
     var address: String
+    var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
     
     init(id: UUID = UUID(), username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
@@ -41,6 +42,7 @@ class User: Identifiable {
         case address
         
     }
+    
     
 }
 

@@ -10,8 +10,8 @@ import SwiftUI
 struct UserEditFormView: View {
     
     @Binding var user: User
-    @EnvironmentObject var userData: UserData // Accès à userData
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userData: UserData
     @State private var showImagePicker = false
     
     var body: some View {
@@ -21,31 +21,7 @@ struct UserEditFormView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                if let image = userData.inputImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 8))
-                        .shadow(radius: 10)
-                        .onTapGesture{
-                            showImagePicker = true
-                        }
-                
-                        
-                } else {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .scaledToFit()
-                        
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-                        .shadow(radius: 7)
-                        .onTapGesture {
-                            showImagePicker = true
-                        }
-                }
+                UserPicture(image: $userData.inputImage)
                 
                 TextField("Nom d'utilisateur", text: $user.username)
                     .padding()

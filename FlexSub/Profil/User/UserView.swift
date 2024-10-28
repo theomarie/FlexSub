@@ -4,9 +4,8 @@
 //
 //  Created by apprenant103 on 25/10/2024.
 //
+//Vue profil
 
-
-import SwiftUI
 
 import SwiftUI
 
@@ -17,24 +16,7 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             HStack {
-                
-                if let picture = userData.user.picture {
-                    Image(uiImage: picture)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                        .frame(minWidth: 100, maxWidth: 200)
-                        .shadow(radius: 7)
-                } else {
-                    Image(systemName: "person.circle") // Image par défaut
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-                        .frame(minWidth: 100, maxWidth: 150)
-                        .shadow(radius: 7)
-                }
+                UserPicture(image: $userData.user.picture) 
 
                 VStack {
                     Text(userData.user.username)
@@ -42,8 +24,10 @@ struct UserView: View {
                     Text(userData.user.email)
                         .font(.subheadline)
                         .fontWeight(.light)
-                    
-                   
+
+                    NavigationLink(destination: ReviewsView().environmentObject(userData)) {
+                        Text("Voir les avis")
+                    }
                 }
                 .navigationTitle("Profil")
                 .toolbar {
@@ -58,10 +42,9 @@ struct UserView: View {
                 .padding()
                 .sheet(isPresented: $isEditing) {
                     UserEditFormView(user: $userData.user)
-                        .environmentObject(userData)
+                        .environmentObject(userData) 
                 }
             }
-            .padding()
         }
     }
 }
