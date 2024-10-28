@@ -19,9 +19,10 @@ struct ReservationView: View {
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 20)
-
+               
                 HStack {
-                    if let profileImage = activity.owner.image {
+                    /*
+                    if let profileImage = activity.owner {
                         profileImage
                             .resizable()
                             .scaledToFit()
@@ -33,10 +34,11 @@ struct ReservationView: View {
                             .scaledToFit()
                             .frame(width: 60, height: 60)
                             .foregroundColor(.gray)
+                     */
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Proposé par : \(activity.owner.username)")
+                        Text("Proposé par : \(activity.owner)")
                             .font(.headline)
                         
                   
@@ -54,16 +56,10 @@ struct ReservationView: View {
                 
                 // Image de l'établissement et informations
                 HStack(alignment: .top) {
-                    if let image = activity.etablissement.image {
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
-                    }
+                   // voir dans la list activites comment gerer les images
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(activity.etablissement.name)
+                        Text(activity.address.streetAddress)
                             .font(.headline)
                         
                         // Bouton pour ouvrir Google Maps
@@ -89,7 +85,7 @@ struct ReservationView: View {
                     Text("Date et heure : \(formatDate(activity.date))")
                         .font(.subheadline)
                     
-                    Text("Lieu : \(activity.location)")
+                    Text("Lieu : \(activity.address.formattedAddress)")
                         .font(.subheadline)
                     
                     Text("Prix : \(String(format: "%.2f", activity.price))€")
@@ -118,10 +114,12 @@ struct ReservationView: View {
     
     // Fonction pour ouvrir l'emplacement dans Google Maps
     func openInMaps() {
-        let address = "\(activity.etablissement.address.street), \(activity.etablissement.address.city)"
+       /*
         if let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
             UIApplication.shared.open(url)
         }
+        */
+    
     }
 
    
@@ -131,7 +129,7 @@ struct ReservationView: View {
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
-}
+
 
 
 #Preview {
