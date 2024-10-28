@@ -13,13 +13,13 @@ class User: Identifiable {
     var username: String
     var email: String
     var password: String
-    var firstName: String?
-    var lastName: String?
+    var firstName: String
+    var lastName: String
     var picture: UIImage?
     var address: String
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
     
-    init(id: UUID = UUID(), username: String, email: String, password: String, firstName: String? = nil, lastName: String? = nil, picture: UIImage? = nil, address: String) {
+    init(id: UUID = UUID(), username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
         self.id = id
         self.username = username
         self.email = email
