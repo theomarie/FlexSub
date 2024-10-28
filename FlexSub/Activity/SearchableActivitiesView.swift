@@ -18,13 +18,7 @@ struct SearchableActivitiesView: View {
     var body: some View {
         VStack {
           
-            Picker("Catégorie", selection: $selectedCategory) {
-                ForEach(Category.allCases) { category in
-                    Text(category.rawValue).tag(category)
-                }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
+            
 
             // Barre de recherche
             TextField("Rechercher une activité ou un établissement", text: $searchText)

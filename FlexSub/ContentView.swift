@@ -15,7 +15,9 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Activités", systemImage: "star") {
-                // Vue Activités
+                NavigationStack() {
+                  
+                }
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
