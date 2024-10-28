@@ -7,7 +7,7 @@
 
 enum Brand: String, CaseIterable {
     case basicFit = "Basic fit"
-    case pathe = "Pathé"
+    case pathe = "Pathe"
     case ugc = "UGC"
     case jeuxdepomme = "Jeux de peaume"
     

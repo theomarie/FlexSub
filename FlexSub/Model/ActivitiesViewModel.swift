@@ -16,6 +16,10 @@ import Foundation
         return nil
     }
     
+    func addActivity(activity: Activity) {
+        activities.append(activity)
+    }
+    
     
 }
 

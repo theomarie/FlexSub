@@ -65,7 +65,7 @@ struct ActivityRow: View {
 
 
 let ownerUser = User(
-    id: UUID(),
+    id: UUID().uuidString,
     username: "Stéphane",
     email: "stephane@example.com",
     password: "password123",
@@ -73,9 +73,10 @@ let ownerUser = User(
 )
 
 let cinemaActivity = Activity(
+    id: UUID().uuidString,
     title: "Terrifier 3",
     status: .published,
-    owner: ownerUser.id,
+    ownerId: ownerUser.id,
     price: 10.50,
     date: Date(),
     category: .cinema,

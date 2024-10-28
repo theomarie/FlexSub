@@ -14,8 +14,8 @@ extension Activity {
          
          return [
                      Activity(
-                         title: "Basic fit séance",
-                         owner: users().randomElement()!.id,
+                        id:  UUID().uuidString, title: "Basic fit séance",
+                         ownerId: users().randomElement()!.id,
                          participant: nil ,
                          price: 5.0,
                          date: Date(),
@@ -32,8 +32,8 @@ extension Activity {
                          )
                      ),
                      Activity(
-                         title: "Séance du joker 2",
-                         owner: users().randomElement()!.id,
+                        id:  UUID().uuidString, title: "Séance du joker 2",
+                         ownerId: users().randomElement()!.id,
                          participant: nil,
                          price: 3.0,
                          date: Date().addingTimeInterval(86400), // Activité le lendemain
@@ -50,8 +50,8 @@ extension Activity {
                          )
                      ),
                      Activity(
-                         title: "Séance Moi moche et Méchant",
-                         owner: users().randomElement()!.id,
+                        id:  UUID().uuidString, title: "Séance Moi moche et Méchant",
+                        ownerId: users().randomElement()!.id,
                          participant: nil,
                          price: 3.0,
                          date: Date().addingTimeInterval(86400), // Activité le lendemain

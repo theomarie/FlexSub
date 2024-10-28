@@ -38,7 +38,7 @@ struct ReservationView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Proposé par : \(activity.owner)")
+                        Text("Proposé par : \(activity.ownerId)")
                             .font(.headline)
                         
                   
