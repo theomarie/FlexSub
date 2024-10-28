@@ -12,6 +12,7 @@ import SwiftUI
 struct ActivitiesListView: View {
     // données local sample
     let activities: [Activity] = Activity.sampleData()
+    // ActivitiesViewModel
     // Fin Local
     
     @State private var selectedCategory: Category = .all
