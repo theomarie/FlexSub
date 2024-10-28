@@ -17,9 +17,19 @@ class User: Identifiable {
     var lastName: String?
     var picture: UIImage?
     var address: String
-  //  var phone: String? voir peut etre un protocol pour la gestion des numéros
-    
-    init(id: UUID = UUID(), username: String, email: String, password: String, firstName: String? = nil, lastName: String? = nil, picture: UIImage? = nil, address: String) {
+    var image: Image? // Image de type SwiftUI
+
+    init(
+        id: UUID = UUID(),
+        username: String,
+        email: String,
+        password: String,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        picture: UIImage? = nil,
+        address: String,
+        image: Image? = nil // Ajout de l'image ici
+    ) {
         self.id = id
         self.username = username
         self.email = email
@@ -28,7 +38,7 @@ class User: Identifiable {
         self.lastName = lastName
         self.picture = picture
         self.address = address
-       // self.phone = phone
+        self.image = image
     }
     
     

@@ -63,7 +63,9 @@ let ownerUser = User(
     username: "Stéphane",
     email: "stephane@example.com",
     password: "password123",
-    address: "123 rue de Paris"
+    address: "123 rue de Paris",
+    image: Image("User2")
+
 )
 
 let cinemaActivity = Activity(
