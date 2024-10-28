@@ -7,7 +7,7 @@
 
 import Foundation
 
-//@Observable class Catalog {
-//    var myActivities :
-//}
+@Observable class Catalog {
+    var activities : [Activity] = []
+}
 

@@ -15,20 +15,32 @@ A remplacer plus tard par le nombre d'éléments du tableau myActivities
  */
     var count : Int = 0
     
+    @State var showAddingField: Bool = false
+    
     var body: some View {
         NavigationStack{
             
             VStack{
                 if count == 0{
-                    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                    Text("Partagez une activité")
                 } else {
                     Form{
-                        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                        Text("Annonce 1")
+                        Text("Annonce 2")
                     }
                 }
             }
             .navigationTitle("Mes activités")
-            
+            .toolbar {
+                Button {
+                    showAddingField = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .sheet(isPresented: $showAddingField) {
+                    AddActivityFormView()
+                }
+            }
         }
     }
 }

@@ -12,9 +12,9 @@ struct Activity: Identifiable {
     var title: String
     var status: Status = .published
     var owner: User.ID
-    var participant: User.ID
+    var participant: User.ID?
     var price: Double = 0
     var date: Date
     var category: Category = .all // Revoir plus tard 
-    var etablissementId: Etablishement.ID
+    var etablissementId: Etablishement.ID?
 }
