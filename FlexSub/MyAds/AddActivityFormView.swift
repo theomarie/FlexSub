@@ -12,7 +12,6 @@ struct AddActivityFormView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var authViewModel
-    
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
     @State private var selectedCategory: Category = .all // Catégorie sélectionnée
     @State private var title: String = ""
@@ -62,16 +61,6 @@ struct AddActivityFormView: View {
                             .foregroundColor(.gray)
                             .italic()
                             .padding(.leading, 4)
-                    }
-                    HStack{
-                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
-                        TextField("", text: $price)
-                        
-                        // Si price est un Double
-                        //TextField("Prix", value: $price, format: .number)
-                        
-                        Spacer()
-                        Text("€")
                     }
                     HStack{
                         // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
@@ -145,4 +134,6 @@ struct AddActivityFormView: View {
 
 #Preview {
     AddActivityFormView()
+        .environment(ActivitiesViewModel())
+        .environment(AuthViewModel())
 }
