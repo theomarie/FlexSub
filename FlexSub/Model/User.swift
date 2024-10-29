@@ -32,7 +32,7 @@ class User: Identifiable {
            ]
        }
     
-    init(id: UUID = UUID(), username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
+    init(id: String, username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
         self.id = id
         self.username = username
         self.email = email

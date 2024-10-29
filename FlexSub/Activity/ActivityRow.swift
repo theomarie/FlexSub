@@ -67,9 +67,12 @@ struct ActivityRow: View {
 let ownerUser = User(
     id: UUID().uuidString,
     username: "Stéphane",
-    email: "stephane@example.com",
-    password: "password123",
-    address: "123 rue de Paris"
+    email: "Dupont",
+    password: "Stéphane",
+    firstName: "stephane@example.com",
+    lastName: "password123",
+    picture: UIImage(resource: .user1),
+    address: "123 rue de paris"
 )
 
 let cinemaActivity = Activity(
