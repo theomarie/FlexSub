@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ActivitiesListView: View {
     @Bindable var activitiesViewModel: ActivitiesViewModel
+    @State private var selectedActivity: Activity? // Pour suivre l'activité sélectionnée
 
     var body: some View {
         VStack {
@@ -24,10 +25,16 @@ struct ActivitiesListView: View {
 
             List(activitiesViewModel.filteredActivities) { activity in
                 ActivityRow(activity: activity)
+                    .onTapGesture {
+                        selectedActivity = activity
+                    }
             }
             .listStyle(PlainListStyle())
         }
-    }
+        .navigationDestination(item: $selectedActivity) { activity in
+                       ActivityReservation(activity: activity)
+                   }    }
+        
 }
 
 #Preview {
