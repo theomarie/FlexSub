@@ -60,9 +60,7 @@ struct AddActivityFormView: View {
                         // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
                         TextField("0", text: $price)
                             .foregroundColor(price.count == 1 ?  .gray : .black)
-                            .italic(Bool(price.count == 1))                        
-                        // Si price est un Double
-                        //TextField("Prix", value: $price, format: .number)
+                            .italic(Bool(price.count == 1))
                         
                         Spacer()
                         Text("€")
