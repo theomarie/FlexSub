@@ -7,18 +7,29 @@
 
 import SwiftUI
 import PhotosUI
+import Combine
 
  public struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
      
-
      public func makeUIViewController(context: Context) -> PHPickerViewController {
-        var config = PHPickerConfiguration()
-        config.filter = .images
-        let picker = PHPickerViewController(configuration: config)
-        picker.delegate = context.coordinator
-        return picker
-    }
+         // Demander les permissions avant de créer le PHPickerViewController
+         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+             if status != .authorized {
+                 // Gérer le cas où les permissions sont refusées
+                 // (par exemple, afficher une alerte)
+                 print("Accès à la photothèque refusé.")
+             }
+         }
+         
+         var config = PHPickerConfiguration()
+         config.filter = .images
+         let picker = PHPickerViewController(configuration: config)
+         picker.delegate = context.coordinator
+         return picker
+         }
+
+     
 
      public func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
         
