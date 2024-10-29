@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ActivitiesView: View {
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
+    
     /*
        déclarer les listes en utilisant le ActivitiesViewModel
      @Environment(ActivitiesViewModel.self) var activities

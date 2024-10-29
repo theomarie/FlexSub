@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable class ActivitiesViewModel {
-    var activities : [Activity] = []
+    var activities : [Activity] = Activity.sampleData()
     
 
     
@@ -20,6 +20,8 @@ import Foundation
         activities.append(activity)
     }
     
-    
+    func trieSearchBar() -> [Activity] {
+        
+    }
 }
 
