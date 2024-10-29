@@ -38,11 +38,8 @@ struct AddActivityFormView: View {
             }
             
             Section {
-                DatePicker("Date de début", selection: $date)
-            } header: {
-                Text("Début de l'activité")
-                    .foregroundStyle(.blue)
-            }
+                DatePicker("Début de l'activité", selection: $date)
+            } 
             
             Section{
                 HStack{
@@ -51,6 +48,11 @@ struct AddActivityFormView: View {
                     Spacer()
                     Text("€")
                 }
+               
+            }
+            header: {
+                Text("Prix")
+                    .foregroundStyle(.blue)
             }
             Section{
                 AddressSearchView()
