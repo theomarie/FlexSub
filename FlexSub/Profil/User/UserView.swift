@@ -12,21 +12,21 @@ import SwiftUI
 import SwiftUI
 
 struct UserView: View {
-    @StateObject private var viewModel = UserViewModel()
+    @StateObject private var userViewModel = UserViewModel()
     @State private var isEditing = false
     
     var body: some View {
         NavigationView {
             VStack {
                 HStack {
-                    UserPicture(image: $viewModel.user.picture)
+                    UserPicture(image: $userViewModel.user.picture)
                     
                     VStack {
-                        Text(viewModel.user.username)
+                        Text(userViewModel.user.username)
                             .font(.title)
                         
                         
-                        NavigationLink(destination: ReviewsView(user: viewModel.user)) {
+                        NavigationLink(destination: ReviewsView(user: userViewModel.user)) {
                             Text("Voir les avis")
                         }
                     }
@@ -49,7 +49,7 @@ struct UserView: View {
             }
             .padding()
             .sheet(isPresented: $isEditing) {
-                UserEditFormView(user: $viewModel.user)
+                UserEditFormView(user: $userViewModel.user)
             }
         }
     }
