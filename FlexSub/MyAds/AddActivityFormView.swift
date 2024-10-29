@@ -39,7 +39,7 @@ struct AddActivityFormView: View {
             
             Section {
                 DatePicker("Début de l'activité", selection: $date)
-            } 
+            }
             
             Section{
                 HStack{
@@ -111,7 +111,11 @@ struct AddActivityFormView: View {
 
 
 #Preview {
-    AddActivityFormView()
-        .environment(ActivitiesViewModel())
-        .environment(AuthViewModel())
+    NavigationStack {
+        AddActivityFormView()
+            .environment(ActivitiesViewModel())
+            .environment(AuthViewModel())
+    }
+    .navigationTitle("Partager une activité")
+    
 }
