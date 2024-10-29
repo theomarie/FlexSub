@@ -12,7 +12,7 @@ import MapKit
 
 
 struct AddressSearchView: View {
-    @State private var viewModel = AddressSearchViewModel()
+    @Binding var viewModel: AddressSearchViewModel
     @State private var query: String = ""
     
     var body: some View {
@@ -79,7 +79,7 @@ struct AddressSearchView: View {
 
 
 #Preview {
-    AddressSearchView()
+    AddressSearchView(viewModel: .constant(AddressSearchViewModel()))
 }
 
 #Preview {

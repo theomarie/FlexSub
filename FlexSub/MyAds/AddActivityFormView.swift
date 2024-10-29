@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct AddActivityFormView: View {
-    
+    @State private var addressSearchViewModel = AddressSearchViewModel()
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var authViewModel
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
@@ -55,7 +55,7 @@ struct AddActivityFormView: View {
                     .foregroundStyle(.blue)
             }
             Section{
-                AddressSearchView()
+                AddressSearchView(viewModel: $addressSearchViewModel)
             } header: {
                 Text("Lieu")
                     .foregroundStyle(.blue)
@@ -81,7 +81,10 @@ struct AddActivityFormView: View {
             return
         }
         
-        
+        guard let addressSelected = addressSearchViewModel.selectedAddress else {
+            print("l'adresse n'est pas sélectionnée.")
+            return 
+        }
         
         let newActivity = Activity(
             id: UUID().uuidString,
@@ -91,16 +94,7 @@ struct AddActivityFormView: View {
             price: priceValue,
             date: date,
             category: selectedCategory, // Utilise la catégorie sélectionnée
-            address: Address(
-                streetAddress: location,
-                city: "Paris",
-                formattedAddress: location,
-                state: "Ile-de-France",
-                zipCode: "75001",
-                country: "France",
-                lng: 2.3522,
-                lat: 48.8566
-            )
+            address: addressSelected
         )
         
         activitiesViewModel.addActivity(activity: newActivity)
