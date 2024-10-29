@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-
 struct UserPicture: View {
     @Binding var image: UIImage?
     @State private var showImagePicker = false
@@ -42,6 +41,10 @@ struct UserPicture: View {
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(image: $image)
+                .environmentObject(UserViewModel())
         }
     }
 }
+
+
+// UserPicture(image: $userData.inputImage) sert a appelé l'mage de l'utilisateur

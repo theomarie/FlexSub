@@ -14,7 +14,7 @@ struct ContentView: View {
     // environnement de mon activites
     @Environment(AuthViewModel.self) var authViewModel
 
-    @StateObject var userData = UserData() 
+    
 
     var body: some View {
         TabView {
@@ -33,11 +33,12 @@ struct ContentView: View {
             Tab("Messagerie", systemImage: "message.fill") {
                 // Vue Messagerie
             }
-
+            
             Tab("Profil", systemImage: "person.crop.square") {
-                Button("Logout") {
-                    authViewModel.logout()
+                NavigationStack {
+                    UserView()
                 }
+                
             }
         }
        

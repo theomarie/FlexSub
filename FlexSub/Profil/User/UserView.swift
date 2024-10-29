@@ -9,47 +9,50 @@
 
 import SwiftUI
 
-struct UserView: View {
-    @StateObject var userData = UserData() 
-    @State private var isEditing = false
+import SwiftUI
 
+struct UserView: View {
+    @StateObject private var viewModel = UserViewModel()
+    @State private var isEditing = false
+    
     var body: some View {
         NavigationView {
-            HStack {
-                UserPicture(image: $userData.user.picture) 
-
-                VStack {
-                    Text(userData.user.username)
-                        .font(.title)
-                    Text(userData.user.email)
-                        .font(.subheadline)
-                        .fontWeight(.light)
-
-                    NavigationLink(destination: ReviewsView().environmentObject(userData)) {
-                        Text("Voir les avis")
-                    }
-                }
-                .navigationTitle("Profil")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isEditing = true
-                        }) {
-                            Image(systemName: "pencil")
+            VStack {
+                HStack {
+                    UserPicture(image: $viewModel.user.picture)
+                    
+                    VStack {
+                        Text(viewModel.user.username)
+                            .font(.title)
+                        
+                        
+                        NavigationLink(destination: ReviewsView(user: viewModel.user)) {
+                            Text("Voir les avis")
                         }
                     }
                 }
-                .padding()
-                .sheet(isPresented: $isEditing) {
-                    UserEditFormView(user: $userData.user)
-                        .environmentObject(userData) 
+                Spacer()
+                Button(action: AuthViewModel().logout ){
+                    Text("Se déconnecter")
                 }
+            }
+            
+            .navigationTitle("Profil")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isEditing = true
+                    }) {
+                        Image(systemName: "pencil")
+                    }
+                }
+            }
+            .padding()
+            .sheet(isPresented: $isEditing) {
+                UserEditFormView(user: $viewModel.user)
             }
         }
     }
 }
 
 
-#Preview {
-    UserView()
-}

@@ -17,8 +17,8 @@ class User: Identifiable {
     var lastName: String
     var picture: UIImage?
     var address: String
-    var reviews: [Review] = []  // Liste des avis pour cet utilisateur
-  //  var phone: String? voir peut etre un protocol pour la gestion des numéros
+    var reviews: [Review] = []
+    //  var phone: String? voir peut etre un protocol pour la gestion des numéros
     
     
     
