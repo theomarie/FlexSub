@@ -12,7 +12,7 @@ struct AddActivityFormView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var authViewModel
-
+    
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
     @State private var selectedCategory: Category = .all // Catégorie sélectionnée
     @State private var title: String = ""
@@ -23,8 +23,16 @@ struct AddActivityFormView: View {
     var body: some View {
         Form{
             Section{
-                TextField("Séance Joker 2, entrée BasicFit, ... ", text: $title)
-                    .italic()
+                ZStack(alignment: .leading){
+                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
+                    if title.isEmpty {
+                        Text("Séance Joker 2, entrée BasicFit, ...")
+                            .foregroundColor(.gray)
+                            .italic()
+                            .padding(.leading, 4)
+                    }
+                    TextField("", text: $title)
+                }
             } header: {
                 Text("Titre de l'activité")
                     .foregroundStyle(.blue)
@@ -47,54 +55,67 @@ struct AddActivityFormView: View {
             }
             
             Section{
-                HStack{
-                    // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
-                    TextField("0", text: $price)
-                    
-                    // Si price est un Double
-                    //TextField("Prix", value: $price, format: .number)
-                    
-                    Spacer()
-                    Text("€")
+                ZStack(alignment: .leading){
+                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
+                    if price.isEmpty {
+                        Text("0")
+                            .foregroundColor(.gray)
+                            .italic()
+                            .padding(.leading, 4)
+                    }
+                    HStack{
+                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
+                        TextField("", text: $price)
+                        
+                        // Si price est un Double
+                        //TextField("Prix", value: $price, format: .number)
+                        
+                        Spacer()
+                        Text("€")
+                    }
+                    HStack{
+                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
+                        TextField("0", text: $price)
+                        
+                        // Si price est un Double
+                        //TextField("Prix", value: $price, format: .number)
+                        
+                        Spacer()
+                        Text("€")
+                    }
                 }
-            } header: {
-                Text("Prix")
-                    .foregroundStyle(.blue)
-            }
-            
-            
-            
-            
-            Section{
-                AddressSearchView()
-            } header: {
-                Text("Lieu")
-                    .foregroundStyle(.blue)
-            }
-            
-            Section{
-                ValidationButtonView(text: "Ajouter une activité") {
-                    //
-                    addActivity()
+                
+                Section{
+                    AddressSearchView()
+                } header: {
+                    Text("Lieu")
+                        .foregroundStyle(.blue)
                 }
+                
+                Section{
+                    ValidationButtonView(text: "Ajouter une activité") {
+                        //
+                        addActivity()
+                    }
+                }
+                
+                //  .listRowBackground(Color.clear)
             }
-            
-            //  .listRowBackground(Color.clear)
         }
     }
-    func addActivity() {
+        func addActivity() {
             guard let priceValue = Double(price) else {
                 print("Erreur : le prix doit être un nombre valide.")
                 return
             }
-
+            
             guard let currentUser = Auth.auth().currentUser else {
                 print("Utilisateur non authentifié.")
                 return
             }
-        
-       
-
+            
+            
+            
             let newActivity = Activity(
                 id: UUID().uuidString,
                 title: title,
@@ -114,11 +135,12 @@ struct AddActivityFormView: View {
                     lat: 48.8566
                 )
             )
-
+            
             activitiesViewModel.addActivity(activity: newActivity)
             dismiss()
         }
-}
+    }
+
 
 
 #Preview {
