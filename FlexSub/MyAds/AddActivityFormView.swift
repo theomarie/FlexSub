@@ -56,15 +56,14 @@ struct AddActivityFormView: View {
             Section{
                 ZStack(alignment: .leading){
                     // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    if price.isEmpty {
-                        Text("0")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .padding(.leading, 4)
-                    }
+                    
                     HStack{
                         // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
                         TextField("0", text: $price)
+                        
+                            .foregroundColor(price.isEmpty ?  .gray : .primary)
+                            .italic()
+                            .padding(.leading, 4)
                         
                         // Si price est un Double
                         //TextField("Prix", value: $price, format: .number)
