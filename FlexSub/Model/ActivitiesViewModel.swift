@@ -12,6 +12,7 @@ import FirebaseFirestore
 
 @Observable class ActivitiesViewModel {
     var activities : [Activity] = Activity.sampleData()
+    var activitiesState: RequestState<[Activity]> = .idle
     var searchText: String = ""
     var selectedCategory: Category = .all
 
@@ -53,6 +54,7 @@ import FirebaseFirestore
         }
     
     func fetchMyActivities(for userId: String) {
+        
         FirebaseManager.shared.db.collection("activities")
             .whereField("ownerId", isEqualTo: userId)
             .getDocuments { snapshot, error in
@@ -77,5 +79,52 @@ import FirebaseFirestore
                 }
             }
     }
+    
+    func fetchActivities(userId: String, date: Date? = nil, query: String? = nil, status: String = Status.published.rawValue) async {
+            activitiesState = await RequestManager.shared.perform {
+                return try await withCheckedThrowingContinuation { continuation in
+                    var dbQuery: Query = FirebaseManager.shared.db.collection("activities")
+                        .whereField("status", isEqualTo: status)
+                        .whereField("ownerId", isNotEqualTo: userId)
+                    
+                    if let date = date {
+                        let timestamp = Timestamp(date: date)
+                        dbQuery = dbQuery.whereField("date", isEqualTo: timestamp)
+                    }
+                    
+                    if let query = query, !query.isEmpty {
+                        dbQuery = dbQuery.whereField("title", isGreaterThanOrEqualTo: query)
+                            .whereField("title", isLessThan: query + "\u{f8ff}")
+                    }
+                    
+                    dbQuery.getDocuments { snapshot, error in
+                        if let error = error {
+                            continuation.resume(throwing: error)
+                            return
+                        }
+                        
+                        guard let documents = snapshot?.documents else {
+                            continuation.resume(throwing: FirebaseError.noDocuments)
+                            return
+                        }
+                        
+                        let activities = documents.compactMap { doc -> Activity? in
+                            try? doc.data(as: Activity.self)
+                        }
+                        
+                        if activities.isEmpty {
+                            continuation.resume(throwing: FirebaseError.noDocuments)
+                        } else {
+                            continuation.resume(returning: activities)
+                        }
+                    }
+                }
+            }
+            
+            // Mettre à jour les activities si la requête est réussie
+            if case .success(let fetchedActivities) = activitiesState {
+                self.activities = fetchedActivities
+            }
+        }
 }
 
