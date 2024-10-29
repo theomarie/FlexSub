@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Activity: Identifiable {
+struct Activity: Identifiable, Codable {
     let id:  String
     var title: String
     var status: Status = .published

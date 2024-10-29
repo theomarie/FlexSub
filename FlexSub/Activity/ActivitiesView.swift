@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ActivitiesView: View {
-    @Environment(ActivitiesViewModel.self) var activitiesViewModel
+    @Bindable var activitiesViewModel: ActivitiesViewModel
+    
     var body: some View {
         VStack() {
             SearchableActivitiesView(activitiesViewModel: activitiesViewModel)
@@ -20,8 +21,7 @@ struct ActivitiesView: View {
 
 #Preview {
     NavigationStack() {
-        ActivitiesView()
-            .environment(ActivitiesViewModel())
+        ActivitiesView(activitiesViewModel: ActivitiesViewModel())
     }
  
 }

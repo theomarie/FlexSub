@@ -9,7 +9,7 @@
 
 
 
-enum Status: String, Statutes {
+enum Status: String, Statutes, Codable {
     case published = "Publier"
     case inProgress = "En cours"
     case awaiting = "En attente"
@@ -22,4 +22,5 @@ enum Status: String, Statutes {
     static var allStatutes: [Status] {
         return [.published, .inProgress, .awaiting, .fineshed]
     }
+    
 }

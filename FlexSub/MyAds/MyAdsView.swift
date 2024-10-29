@@ -6,20 +6,20 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MyAdsView: View {
-    
+    @Bindable var activitiesViewModel: ActivitiesViewModel
+    var user = Auth.auth().currentUser
     /*
      Variable pour le test d'affichage conditionnel.
      A remplacer plus tard par le nombre d'éléments du tableau myActivities
-     */
-    var count : Int = 0
-    
+     */    
     @State var showAddingField: Bool = false
     
     var body: some View {
         VStack{
-            if count == 0{
+            if activitiesViewModel.activities.isEmpty{
                 Text("Vous trouverez ici le détail des activités que vous avez partagées.\n\nPartagez une nouvelle activité en appuyant sur le ")
                     .font(.title3)
                 
@@ -33,22 +33,25 @@ struct MyAdsView: View {
                 Spacer()
                 
             } else {
-                // Affichage des activités
+                ActivitiesListView(activitiesViewModel: activitiesViewModel)
             }
         }
-        .padding(32)
         .navigationTitle("Mes activités")
         .toolbar {
             NavigationLink(destination: AddActivityFormView()) {
                 Label("Partager une activité", systemImage: "plus")
             }
         }
+        .onAppear() {
+            guard let userId = user?.uid else { return }
+            self.activitiesViewModel.fetchMyActivities(for: userId)
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        MyAdsView()
+        MyAdsView(activitiesViewModel: ActivitiesViewModel())
     }
     
 }
