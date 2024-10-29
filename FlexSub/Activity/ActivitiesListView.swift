@@ -32,7 +32,7 @@ struct ActivitiesListView: View {
             .listStyle(PlainListStyle())
         }
         .navigationDestination(item: $selectedActivity) { activity in
-                       ActivityReservation(activity: activity)
+                       ActivityReservationView(activity: activity)
                    }    }
         
 }
