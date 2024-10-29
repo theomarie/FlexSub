@@ -22,16 +22,12 @@ struct AddActivityFormView: View {
     var body: some View {
         Form{
             Section{
-                ZStack(alignment: .leading){
-                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    TextField("Séance Joker 2, entrée BasicFit, ...", text: $title)
-                        .italic(Bool(title.isEmpty))
-                }
+                TextField("Séance Joker 2, entrée BasicFit, ...", text: $title)
+                    .italic(Bool(title.isEmpty))
             } header: {
                 Text("Titre de l'activité")
                     .foregroundStyle(.blue)
             }
-            
             Section {
                 Picker("Catégorie", selection: $selectedCategory) {
                     ForEach(Category.allCases) { category in
@@ -49,71 +45,66 @@ struct AddActivityFormView: View {
             }
             
             Section{
-                ZStack(alignment: .leading){
-                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    HStack{
-                        TextField("0", text: $price)
-                            .italic(Bool(price.isEmpty))
-                        Spacer()
-                        Text("€")
-                    }
+                HStack{
+                    TextField("0", text: $price)
+                        .italic(Bool(price.isEmpty))
+                    Spacer()
+                    Text("€")
                 }
-                
-                Section{
-                    AddressSearchView()
-                } header: {
-                    Text("Lieu")
-                        .foregroundStyle(.blue)
+            }
+            Section{
+                AddressSearchView()
+            } header: {
+                Text("Lieu")
+                    .foregroundStyle(.blue)
+            }
+            
+            Section{
+                ValidationButtonView(text: "Ajouter une activité") {
+                    addActivity()
                 }
-                
-                Section{
-                    ValidationButtonView(text: "Ajouter une activité") {
-                        //
-                        addActivity()
-                    }
-                }
-                
-                //  .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+
             }
         }
     }
-        func addActivity() {
-            guard let priceValue = Double(price) else {
-                print("Erreur : le prix doit être un nombre valide.")
-                return
-            }
-            
-            guard let currentUser = Auth.auth().currentUser else {
-                print("Utilisateur non authentifié.")
-                return
-            }
-            
-            
-            
-            let newActivity = Activity(
-                id: UUID().uuidString,
-                title: title,
-                ownerId: currentUser.uid,
-                participant: nil,
-                price: priceValue,
-                date: date,
-                category: selectedCategory, // Utilise la catégorie sélectionnée
-                address: Address(
-                    streetAddress: location,
-                    city: "Paris",
-                    formattedAddress: location,
-                    state: "Ile-de-France",
-                    zipCode: "75001",
-                    country: "France",
-                    lng: 2.3522,
-                    lat: 48.8566
-                )
+    func addActivity() {
+        guard let priceValue = Double(price) else {
+            print("Erreur : le prix doit être un nombre valide.")
+            return
+        }
+        
+        guard let currentUser = Auth.auth().currentUser else {
+            print("Utilisateur non authentifié.")
+            return
+        }
+        
+        
+        
+        let newActivity = Activity(
+            id: UUID().uuidString,
+            title: title,
+            ownerId: currentUser.uid,
+            participant: nil,
+            price: priceValue,
+            date: date,
+            category: selectedCategory, // Utilise la catégorie sélectionnée
+            address: Address(
+                streetAddress: location,
+                city: "Paris",
+                formattedAddress: location,
+                state: "Ile-de-France",
+                zipCode: "75001",
+                country: "France",
+                lng: 2.3522,
+                lat: 48.8566
             )
-            
-            activitiesViewModel.addActivity(activity: newActivity)
-            dismiss()
-        }
+        )
+        
+        activitiesViewModel.addActivity(activity: newActivity)
+        dismiss()
     }
+}
 
 
 
