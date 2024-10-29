@@ -21,7 +21,7 @@ import Foundation
     }
     
     func trieSearchBar() -> [Activity] {
-        
+        return []
     }
 }
 
