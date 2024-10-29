@@ -24,13 +24,8 @@ struct AddActivityFormView: View {
             Section{
                 ZStack(alignment: .leading){
                     // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    if title.isEmpty {
-                        Text("Séance Joker 2, entrée BasicFit, ...")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .padding(.leading, 4)
-                    }
-                    TextField("", text: $title)
+                    TextField("Séance Joker 2, entrée BasicFit, ...", text: $title)
+                        .italic(Bool(title.isEmpty))
                 }
             } header: {
                 Text("Titre de l'activité")
@@ -57,11 +52,8 @@ struct AddActivityFormView: View {
                 ZStack(alignment: .leading){
                     // Placeholder en italique, affiché uniquement lorsque le champ est vide
                     HStack{
-                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
                         TextField("0", text: $price)
-                            .foregroundColor(price.count == 1 ?  .gray : .black)
-                            .italic(Bool(price.count == 1))
-                        
+                            .italic(Bool(price.isEmpty))
                         Spacer()
                         Text("€")
                     }
