@@ -10,27 +10,11 @@ import SwiftUI
 
 
 struct ActivitiesListView: View {
-    // données local sample
-    var activities: [Activity] = Activity.sampleData()
-   
-
-    // ActivitiesViewModel
-    // Fin Local
-    
-    @State private var selectedCategory: Category = .all
-    
-    
-    var filteredActivities: [Activity] {
-        if selectedCategory == .all {
-            return activities
-        } else {
-            return activities.filter { $0.category == selectedCategory }
-        }
-    }
+    @Bindable var activitiesViewModel: ActivitiesViewModel
 
     var body: some View {
         VStack {
-            Picker("Catégorie", selection: $selectedCategory) {
+            Picker("Catégorie", selection: $activitiesViewModel.selectedCategory) {
                 ForEach(Category.allCases) { category in
                     Text(category.rawValue).tag(category)
                 }
@@ -38,7 +22,7 @@ struct ActivitiesListView: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
 
-            List(filteredActivities) { activity in
+            List(activitiesViewModel.filteredActivities) { activity in
                 ActivityRow(activity: activity)
             }
             .listStyle(PlainListStyle())
@@ -47,5 +31,5 @@ struct ActivitiesListView: View {
 }
 
 #Preview {
-    ActivitiesListView()
+    ActivitiesListView(activitiesViewModel: ActivitiesViewModel())
 }

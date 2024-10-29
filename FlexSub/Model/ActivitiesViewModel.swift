@@ -9,19 +9,23 @@ import Foundation
 
 @Observable class ActivitiesViewModel {
     var activities : [Activity] = Activity.sampleData()
-    
+    var searchText: String = ""
+    var selectedCategory: Category = .all
 
     
-    func myActivities(userID: UUID) -> [Activity]? {
-        return nil
-    }
-    
-    func addActivity(activity: Activity) {
-        activities.append(activity)
-    }
-    
-    func trieSearchBar() -> [Activity] {
-        return []
-    }
+    var filteredActivities: [Activity] {
+           activities.filter { activity in
+               (selectedCategory == .all || activity.category == selectedCategory) &&
+               (searchText.isEmpty || activity.title.lowercased().contains(searchText.lowercased()))
+           }
+       }
+
+       func addActivity(activity: Activity) {
+           activities.append(activity)
+       }
+
+       func myActivities(userId: String) -> [Activity] {
+           activities.filter { $0.ownerId == userId }
+       }
 }
 
