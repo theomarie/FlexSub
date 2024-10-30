@@ -15,7 +15,7 @@ import Combine
     var addresses: [Address] = []
     var selectedAddress: Address?
     var isAddressSelected: Bool = false // État de sélection de l'adresse
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     
     func search(for query: String) {
         let request = MKLocalSearch.Request()

@@ -9,10 +9,9 @@ import SwiftUI
 import FirebaseAuth
 
 struct AddActivityFormView: View {
-    
+    @State private var addressSearchViewModel = AddressSearchViewModel()
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var authViewModel
-    
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
     @State private var selectedCategory: Category = .all // Catégorie sélectionnée
     @State private var title: String = ""
@@ -23,21 +22,12 @@ struct AddActivityFormView: View {
     var body: some View {
         Form{
             Section{
-                ZStack(alignment: .leading){
-                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    if title.isEmpty {
-                        Text("Séance Joker 2, entrée BasicFit, ...")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .padding(.leading, 4)
-                    }
-                    TextField("", text: $title)
-                }
+                TextField("Séance Joker 2, entrée BasicFit, ...", text: $title)
+                    .italic(Bool(title.isEmpty))
             } header: {
                 Text("Titre de l'activité")
                     .foregroundStyle(.blue)
             }
-            
             Section {
                 Picker("Catégorie", selection: $selectedCategory) {
                     ForEach(Category.allCases) { category in
@@ -48,101 +38,78 @@ struct AddActivityFormView: View {
             }
             
             Section {
-                DatePicker("Date de début", selection: $date)
+                DatePicker("Début de l'activité", selection: $date)
+            }
+            
+            Section{
+                HStack{
+                    TextField("0", text: $price)
+                        .italic(Bool(price.isEmpty))
+                    Spacer()
+                    Text("€")
+                }
+               
+            }
+            header: {
+                Text("Prix")
+                    .foregroundStyle(.blue)
+            }
+            Section{
+                AddressSearchView(viewModel: $addressSearchViewModel)
             } header: {
-                Text("Début de l'activité")
+                Text("Lieu")
                     .foregroundStyle(.blue)
             }
             
             Section{
-                ZStack(alignment: .leading){
-                    // Placeholder en italique, affiché uniquement lorsque le champ est vide
-                    if price.isEmpty {
-                        Text("0")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .padding(.leading, 4)
-                    }
-                    HStack{
-                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
-                        TextField("", text: $price)
-                        
-                        // Si price est un Double
-                        //TextField("Prix", value: $price, format: .number)
-                        
-                        Spacer()
-                        Text("€")
-                    }
-                    HStack{
-                        // Si price est un String, que l'on passe après en double au moment de la création de la nouvelle instance avec Double(price)
-                        TextField("0", text: $price)
-                        
-                        // Si price est un Double
-                        //TextField("Prix", value: $price, format: .number)
-                        
-                        Spacer()
-                        Text("€")
-                    }
+                ValidationButtonView(text: "Ajouter une activité") {
+                    addActivity()
                 }
-                
-                Section{
-                    AddressSearchView()
-                } header: {
-                    Text("Lieu")
-                        .foregroundStyle(.blue)
-                }
-                
-                Section{
-                    ValidationButtonView(text: "Ajouter une activité") {
-                        //
-                        addActivity()
-                    }
-                }
-                
-                //  .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+
             }
         }
     }
-        func addActivity() {
-            guard let priceValue = Double(price) else {
-                print("Erreur : le prix doit être un nombre valide.")
-                return
-            }
-            
-            guard let currentUser = Auth.auth().currentUser else {
-                print("Utilisateur non authentifié.")
-                return
-            }
-            
-            
-            
-            let newActivity = Activity(
-                id: UUID().uuidString,
-                title: title,
-                ownerId: currentUser.uid,
-                participant: nil,
-                price: priceValue,
-                date: date,
-                category: selectedCategory, // Utilise la catégorie sélectionnée
-                address: Address(
-                    streetAddress: location,
-                    city: "Paris",
-                    formattedAddress: location,
-                    state: "Ile-de-France",
-                    zipCode: "75001",
-                    country: "France",
-                    lng: 2.3522,
-                    lat: 48.8566
-                )
-            )
-            
-            activitiesViewModel.addActivity(activity: newActivity)
-            dismiss()
+    func addActivity() {
+        guard let priceValue = Double(price) else {
+            print("Erreur : le prix doit être un nombre valide.")
+            return
         }
+        
+        guard let currentUser = Auth.auth().currentUser else {
+            print("Utilisateur non authentifié.")
+            return
+        }
+        
+        guard let addressSelected = addressSearchViewModel.selectedAddress else {
+            print("l'adresse n'est pas sélectionnée.")
+            return 
+        }
+        
+        let newActivity = Activity(
+            id: UUID().uuidString,
+            title: title,
+            ownerId: currentUser.uid,
+            participant: nil,
+            price: priceValue,
+            date: date,
+            category: selectedCategory, // Utilise la catégorie sélectionnée
+            address: addressSelected
+        )
+        
+        activitiesViewModel.addActivity(activity: newActivity)
+        dismiss()
     }
+}
 
 
 
 #Preview {
-    AddActivityFormView()
+    NavigationStack {
+        AddActivityFormView()
+            .environment(ActivitiesViewModel())
+            .environment(AuthViewModel())
+    }
+    .navigationTitle("Partager une activité")
+    
 }

@@ -8,8 +8,8 @@
 import SwiftUI
 import MapKit
 
-struct ReservationView: View {
-    var activity: Activity
+struct ActivityReservationView: View {
+    let activity: Activity
 
     var body: some View {
         ScrollView {
@@ -133,6 +133,6 @@ struct ReservationView: View {
 
 
 #Preview {
-    ReservationView(activity: cinemaActivity)
+    ActivityReservationView(activity: cinemaActivity)
 }
 

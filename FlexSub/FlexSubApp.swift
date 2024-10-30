@@ -24,12 +24,12 @@ struct FlexSubApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
    
 
-
+    
     var body: some Scene {
         WindowGroup {
             AuthSecureScreen()
                 .environment(AuthViewModel())
-            
+                .environment(ActivitiesViewModel())
         }
     }
 }

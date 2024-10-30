@@ -5,7 +5,7 @@
 //  Created by Theo Marie on 23/10/2024.
 //
 
-enum Category: String,CaseIterable, Identifiable, Categories {
+enum Category: String,CaseIterable, Identifiable, Categories, Codable {
     case all = "Tous"
     case cinema = "Cinéma"
     case sport = "Sport"
