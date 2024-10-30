@@ -14,25 +14,27 @@ struct AuthSecureScreen: View {
     
     
     var body: some View {
+        NavigationStack() {
             Group {
                 if authViewModel.isLoading {
                     // Affiche un indicateur de chargement lorsque isLoading est vrai
                     ProgressView("Chargement...")
                         .progressViewStyle(CircularProgressViewStyle())
-                        
+                    
                 } else {
                     // Lorsque le chargement est terminé, on affiche soit la Home, soit AuthView
                     if authViewModel.isLoggedIn {
-                        NavigationView {
+                        
                             ContentView()
-                        }
+                        
                     } else {
-                        AuthView()
+                        AuthLoginView()
                     }
                 }
             }
             .onAppear {
                 authViewModel.checkIfUserIsLoggedIn() // Vérifie l'état de connexion lorsque la vue apparaît
             }
+        }
         }
     }

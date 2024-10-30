@@ -83,6 +83,6 @@ struct UserEditFormView: View {
     }
     
     func saveChanges() {
-        user.picture = userData.inputImage
+        //user.picture = userData.inputImage
     }
 }

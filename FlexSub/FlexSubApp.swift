@@ -27,9 +27,11 @@ struct FlexSubApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthSecureScreen()
-                .environment(AuthViewModel())
-                .environment(ActivitiesViewModel())
+          
+                AuthSecureScreen()
+                    .environment(AuthViewModel())
+                    .environment(ActivitiesViewModel())
+            
         }
     }
 }

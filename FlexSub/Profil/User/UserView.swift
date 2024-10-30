@@ -16,7 +16,7 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             HStack {
-                UserPicture(image: $userData.user.picture) 
+              //  UserPicture(image: $userData.user.picture) 
 
                 VStack {
                     Text(userData.user.username)

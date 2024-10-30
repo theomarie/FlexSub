@@ -15,31 +15,38 @@ class User: Identifiable {
     var password: String
     var firstName: String
     var lastName: String
-    var picture: UIImage?
+    var profileImageUrl: String? = ""
     var address: String
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
     
-    
+    var userImage: UserImage {
+           get {
+               UserImage(url: profileImageUrl)
+           }
+           set {
+               profileImageUrl = newValue.url
+           }
+       }
     
     static func sampleData() -> [User] {
            return [
-            User(id:  UUID().uuidString, username: "john_doe", email: "john.doe@example.com", password: "password123", firstName: "John", lastName: "Doe", picture: UIImage(systemName: "person.fill"), address: "123 Main St, Paris, France"),
-            User(id:  UUID().uuidString, username: "jane_smith", email: "jane.smith@example.com", password: "password123", firstName: "Jane", lastName: "Smith", picture: UIImage(systemName: "person.fill"), address: "456 Elm St, Lyon, France"),
-            User(id:  UUID().uuidString, username: "mike_jones", email: "mike.jones@example.com", password: "password123", firstName: "Mike", lastName: "Jones", picture: UIImage(systemName: "person.fill"), address: "789 Oak St, Bordeaux, France"),
-            User(id:  UUID().uuidString, username: "emma_williams", email: "emma.williams@example.com", password: "password123", firstName: "Emma", lastName: "Williams", picture: UIImage(systemName: "person.fill"), address: "321 Maple St, Lille, France"),
-            User(id:  UUID().uuidString, username: "lucas_brown", email: "lucas.brown@example.com", password: "password123", firstName: "Lucas", lastName: "Brown", picture: UIImage(systemName: "person.fill"), address: "654 Pine St, Nice, France")
+            User(id:  UUID().uuidString, username: "john_doe", email: "john.doe@example.com", password: "password123", firstName: "John", lastName: "Doe", profileImageUrl: "", address: "123 Main St, Paris, France"),
+            User(id:  UUID().uuidString, username: "jane_smith", email: "jane.smith@example.com", password: "password123", firstName: "Jane", lastName: "Smith", profileImageUrl: "", address: "456 Elm St, Lyon, France"),
+            User(id:  UUID().uuidString, username: "mike_jones", email: "mike.jones@example.com", password: "password123", firstName: "Mike", lastName: "Jones", profileImageUrl: "", address: "789 Oak St, Bordeaux, France"),
+            User(id:  UUID().uuidString, username: "emma_williams", email: "emma.williams@example.com", password: "password123", firstName: "Emma", lastName: "Williams", profileImageUrl: "", address: "321 Maple St, Lille, France"),
+            User(id:  UUID().uuidString, username: "lucas_brown", email: "lucas.brown@example.com", password: "password123", firstName: "Lucas", lastName: "Brown", profileImageUrl: "", address: "654 Pine St, Nice, France")
            ]
        }
     
-    init(id: String, username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
+    init(id: String, username: String, email: String, password: String, firstName: String, lastName: String, profileImageUrl: String?, address: String) {
         self.id = id
         self.username = username
         self.email = email
         self.password = password
         self.firstName = firstName
         self.lastName = lastName
-        self.picture = picture
+        self.profileImageUrl = profileImageUrl
         self.address = address
     }
     
