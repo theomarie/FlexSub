@@ -12,6 +12,7 @@ struct ActivitiesView: View {
     @Bindable var activitiesViewModel: ActivitiesViewModel
     var user = Auth.auth().currentUser
     
+    
     var body: some View {
         
         Group {

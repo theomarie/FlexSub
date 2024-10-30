@@ -14,7 +14,7 @@ struct Activity: Identifiable, Codable, Hashable {
     var status: Status = .published
     //var owner: User.ID
     var ownerId: String
-    var participant: User.ID?
+    var participant: String = ""
     var price: Double = 0
     var date: Date
     var category: Category = .all // Revoir plus tard
