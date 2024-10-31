@@ -57,13 +57,13 @@ import FirebaseStorage
     }
     
    
-    func registerUser(_ user: User, profileImage: UIImage?) async -> RequestState<User> {
+    func registerUser(email: String, password: String, profileImage: UIImage?, user: User) async -> RequestState<User> {
             isLoading = true
             defer { isLoading = false }
 
             return await RequestManager.shared.perform {
                 // 1. Créer l'utilisateur dans Firebase Auth
-                let authResult = try await Auth.auth().createUser(withEmail: user.email, password: user.password)
+                let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
                 user.id = authResult.user.uid
                 
                 // 2. Upload de l'image si elle existe et mettre à jour UserImage

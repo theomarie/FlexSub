@@ -35,12 +35,14 @@ struct UserEditFormView: View {
                     .cornerRadius(12)
                     .shadow(radius: 3)
                     .padding(.bottom, 10)
+                /*
                 SecureField("Mot de passe", text: $user.password)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(radius: 3)
                     .padding(.bottom, 10)
+                 */
                 TextField("Prénom", text: $user.firstName)
                     .padding()
                     .background(Color.white)
