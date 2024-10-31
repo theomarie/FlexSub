@@ -10,6 +10,8 @@ import MapKit
 
 struct ActivityReservationView: View {
     let activity: Activity
+    @Environment(AuthViewModel.self) var authViewModel
+
 
     var body: some View {
         ScrollView {
@@ -38,7 +40,7 @@ struct ActivityReservationView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Proposé par : \(activity.ownerId)")
+                        Text("Proposé par : \(authViewModel.currentUser?.username ?? "Anonyme")")
                             .font(.headline)
                         
                   

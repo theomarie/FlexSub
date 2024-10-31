@@ -90,7 +90,7 @@ struct AddActivityFormView: View {
             id: UUID().uuidString,
             title: title,
             ownerId: currentUser.uid,
-            participant: "",
+            participantid: "",
             price: priceValue,
             date: date,
             category: selectedCategory, // Utilise la catégorie sélectionnée

@@ -18,19 +18,27 @@ import FirebaseStorage
     private var imageCache: [String: UIImage] = [:] // Cache pour les images
 
     init() {
-        checkIfUserIsLoggedIn()
-    }
+            checkIfUserIsLoggedIn()
+            
+            // Récupérer l'ID de l'utilisateur actuel
+            
+            if let userId = Auth.auth().currentUser?.uid {
+                print(userId)
+                Task {
+                    await fetchUser(withId: userId)
+                }
+              
+            }
+            
+         
+        }
+        
     
     func checkIfUserIsLoggedIn() {
-        if Auth.auth().currentUser != nil {
-            // Utilisateur connecté
-            self.isLoggedIn = true
-        } else {
-            // Pas de session active
-            self.isLoggedIn = false
+        isLoggedIn = Auth.auth().currentUser != nil
+       
+            isLoading = false
         }
-        self.isLoading = false
-    }
     
     func login(email: String, password: String) {
         AuthManager.shared.loginUser(email: email, password: password) { result in
@@ -119,6 +127,52 @@ import FirebaseStorage
             DispatchQueue.main.async {
                 self.errorMessage = "Erreur lors de la déconnexion : \(error.localizedDescription)"
             }
+        }
+    }
+    
+    
+    
+    
+    func fetchUser(withId userId: String) async -> RequestState<User> {
+        isLoading = true
+        defer { isLoading = false }
+        
+        return await RequestManager.shared.perform {
+            let document = try await Firestore.firestore()
+                .collection("users")
+                .document(userId)
+                .getDocument()
+            
+            guard let data = document.data() else {
+                throw FirebaseError.noDocuments
+            }
+            
+            // Extraire les données utilisateur et les assigner aux propriétés
+            guard let id = data["id"] as? String,
+                  let email = data["email"] as? String,
+                  let firstName = data["firstName"] as? String,
+                  let lastName = data["lastName"] as? String,
+                  let profileImageUrl = data["profileImageUrl"] as? String,
+                  let username = data["username"] as? String else {
+                throw FirebaseError.decodingError
+            }
+            
+            let address = data["address"] as? String ?? ""
+            
+            // Créer une instance User avec les données récupérées
+            let user = User(
+                id: id,
+                username: username,
+                email: email,
+                password: "", // Le mot de passe ne peut pas être récupéré de Firebase
+                firstName: firstName,
+                lastName: lastName,
+                profileImageUrl: profileImageUrl,
+                address: address
+            )
+            
+            self.currentUser = user // Mettre à jour l'utilisateur actuel
+            return user
         }
     }
 }
