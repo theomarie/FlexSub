@@ -68,7 +68,6 @@ let ownerUser = User(
     id: UUID().uuidString,
     username: "Stéphane",
     email: "Dupont",
-    password: "Stéphane",
     firstName: "stephane@example.com",
     lastName: "password123",
     profileImageUrl: "",

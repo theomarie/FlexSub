@@ -164,7 +164,6 @@ import FirebaseStorage
                 id: id,
                 username: username,
                 email: email,
-                password: "", // Le mot de passe ne peut pas être récupéré de Firebase
                 firstName: firstName,
                 lastName: lastName,
                 profileImageUrl: profileImageUrl,

@@ -175,11 +175,11 @@ struct RegisterView: View {
     
     // MARK: - Actions
     private func registerUser() {
-        let user = User(id: UUID().uuidString, username: username, email: email, password: password, firstName: firstName, lastName: lastName, profileImageUrl: "", address: "")
+        let user = User(id: UUID().uuidString, username: username, email: email,  firstName: firstName, lastName: lastName, profileImageUrl: "", address: "")
         
       
         Task {
-            let result = await authViewModel.registerUser(user, profileImage: uiImage)
+            let result = await authViewModel.registerUser(email: email, password: password, profileImage: uiImage, user: user)
             
             switch result {
             case .success(let user):
