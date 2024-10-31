@@ -40,3 +40,8 @@ struct AuthSecureScreen: View {
         }
         }
     }
+
+
+#Preview {
+    ActivitiesListView(activitiesViewModel: ActivitiesViewModel())
+}

@@ -21,7 +21,7 @@ struct UserEditFormView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                UserPicture(image: $userData.inputImage)
+              //  UserPicture(image: $userData.inputImage)
                 
                 TextField("Nom d'utilisateur", text: $user.username)
                     .padding()

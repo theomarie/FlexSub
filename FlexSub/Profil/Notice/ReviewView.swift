@@ -15,7 +15,7 @@ struct ReviewsView: View {
             List {
                 
                 HStack {
-                    UserPicture(image: $userData.inputImage)
+                   // UserPicture(image: $userData.inputImage)
                     Spacer()
                     VStack{
                         Text(userData.user.username)

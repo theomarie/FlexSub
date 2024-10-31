@@ -10,108 +10,81 @@ import MapKit
 
 struct ActivityReservationView: View {
     let activity: Activity
-    @Environment(AuthViewModel.self) var authViewModel
-
+    //@Environment(AuthViewModel.self) var authViewModel
+    var user: User
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-               
-                Text("Réservation")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.bottom, 20)
-               
-                HStack {
-                    /*
-                    if let profileImage = activity.owner {
-                        profileImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                            .clipShape(Circle())
-                    } else {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.gray)
-                     */
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    UserPicture(user: user)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Proposé par : \(user.username)")
+                                .font(.headline)
+                        }
+                        .padding(.leading, 8)
                     }
                     
-                    VStack(alignment: .leading) {
-                        Text("Proposé par : \(authViewModel.currentUser?.username ?? "Anonyme")")
-                            .font(.headline)
+                    Divider()
+                    
+                    // Image de l'établissement et informations
+                    HStack(alignment: .top) {
+                       // voir dans la list activites comment gerer les images
                         
-                  
-                        HStack(spacing: 4) {
-                            ForEach(0..<5) { index in
-                                Image(systemName: index < 4 ? "star.fill" : "star")
-                                    .foregroundColor(index < 4 ? .yellow : .gray)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(activity.address.streetAddress)
+                                .font(.headline)
+                            
+                            // Bouton pour ouvrir Google Maps
+                            Button(action: openInMaps) {
+                                Text("Ouvrir dans Google Maps")
+                                    .font(.subheadline)
+                                    .foregroundColor(.blue)
                             }
                         }
                     }
-                    .padding(.leading, 8)
-                }
-                
-                Divider()
-                
-                // Image de l'établissement et informations
-                HStack(alignment: .top) {
-                   // voir dans la list activites comment gerer les images
                     
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(activity.address.streetAddress)
+                    Divider()
+                    
+                    // Détails de l'activité
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Détails de l'activité")
+                            .font(.title2)
+                            .bold()
+                        
+                        Text(activity.title)
                             .font(.headline)
                         
-                        // Bouton pour ouvrir Google Maps
-                        Button(action: openInMaps) {
-                            Text("Ouvrir dans Google Maps")
-                                .font(.subheadline)
-                                .foregroundColor(.blue)
-                        }
+                        Text("Date et heure : \(formatDate(activity.date))")
+                            .font(.subheadline)
+                        
+                        Text("Lieu : \(activity.address.formattedAddress)")
+                            .font(.subheadline)
+                        
+                        Text("Prix : \(String(format: "%.2f", activity.price))€")
+                            .font(.subheadline)
+                            .bold()
                     }
+                    .padding(.top, 8)
+                    
+                    Divider()
+                    
+              
+                    Button(action: {}) {
+                        Text("Rejoindre l'activité")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding(.top, 16)
                 }
-                
-                Divider()
-                
-                // Détails de l'activité
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Détails de l'activité")
-                        .font(.title2)
-                        .bold()
-                    
-                    Text(activity.title)
-                        .font(.headline)
-                    
-                    Text("Date et heure : \(formatDate(activity.date))")
-                        .font(.subheadline)
-                    
-                    Text("Lieu : \(activity.address.formattedAddress)")
-                        .font(.subheadline)
-                    
-                    Text("Prix : \(String(format: "%.2f", activity.price))€")
-                        .font(.subheadline)
-                        .bold()
-                }
-                .padding(.top, 8)
-                
-                Divider()
-                
-          
-                Button(action: {}) {
-                    Text("Rejoindre l'activité")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.top, 16)
+                .padding()
             }
-            .padding()
-        }
+        
+       
     }
     
     // Fonction pour ouvrir l'emplacement dans Google Maps
@@ -135,6 +108,6 @@ struct ActivityReservationView: View {
 
 
 #Preview {
-    ActivityReservationView(activity: cinemaActivity)
+    ActivityReservationView(activity: cinemaActivity, user: User(id: "ddshu514541", username: "mariethéo", email: "theo@gmail.com", password: "123456", firstName: "Théo", lastName: "Marie", profileImageUrl: "", address: "10 boulevard marechal juin , 14000, Caen"))
 }
 

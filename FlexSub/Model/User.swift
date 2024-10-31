@@ -19,7 +19,8 @@ class User: Identifiable {
     var address: String
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
-    
+    var cachedImage: UIImage?
+
     var userImage: UserImage {
            get {
                UserImage(url: profileImageUrl)
@@ -28,6 +29,26 @@ class User: Identifiable {
                profileImageUrl = newValue.url
            }
        }
+    
+    func loadProfileImage() async -> UIImage {
+            if let cachedImage = cachedImage {
+                return cachedImage
+            }
+            
+            guard let profileImageUrl = profileImageUrl, let url = URL(string: profileImageUrl) else {
+                return UserImage.defaultImage ?? UIImage()
+            }
+            
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                let image = UIImage(data: data)
+                self.cachedImage = image
+                return image ?? UserImage.defaultImage ?? UIImage()
+            } catch {
+                print("Erreur de chargement de l'image :", error.localizedDescription)
+                return UserImage.defaultImage ?? UIImage()
+            }
+        }
     
     static func sampleData() -> [User] {
            return [
