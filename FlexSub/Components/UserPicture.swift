@@ -5,26 +5,18 @@
 //  Created by Theo Marie on 31/10/2024.
 //
 import SwiftUI
-
+import Foundation
 
 struct UserPicture: View {
-    let user: User
+     var user: User
     
     var body: some View {
             VStack {
-                if let profileImage = user.cachedImage {
-                    Image(uiImage: profileImage)
-                        .resizable()
+                if let profileImage =  user.profileImageUrl, let profileImageURL = URL(string: profileImage) {
+                    AsyncImage(url: profileImageURL)
                         .scaledToFit()
-                        
-                        .clipShape(Circle())
-                } else {
-                    ProgressView()
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
-                        .task {
-                            _ = await user.loadProfileImage()
-                        }
                 }
             }
         }
