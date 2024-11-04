@@ -16,9 +16,6 @@ struct ContentView: View {
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
 
     
-    // code Abdelghani
-    @StateObject var userData = UserData()
-    // Fin du code
     
     var body: some View {
         TabView {

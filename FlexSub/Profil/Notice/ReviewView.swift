@@ -3,33 +3,28 @@
 //  FlexSub
 //
 //  Created by apprenant103 on 28/10/2024.
-//
-
 
 import SwiftUI
 
-struct ReviewsView: View {
+struct ReviewView: View {
+    @EnvironmentObject var userData: UserData
     
-    @State var user: User
-
     var body: some View {
-        NavigationView {
+        
+        let averageRating = reviews.reduce(0) { $0 + $1.rating } / Double(reviews.count)
+        NavigationStack {
             List {
                 HStack {
-                    UserPicture(image: $user.picture)
+                    UserPicture(user: $userData.user)
                     Spacer()
-                    VStack {
-                        Text(user.username)
-                            .font(.title3)
-                            .bold()
-
-                        // Calcul de la moyenne des notes
-                        let averageRating = user.reviews.reduce(0) { $0 + $1.rating } / Double(user.reviews.count)
-                        Text("(\(String(format: "%.1f", averageRating)))")
-
+                    VStack(alignment: .center){
+                        HStack() {
+                            Text("\(String(format: "%.1f", averageRating))")
+                                .font(.largeTitle)
+                        }
                         // Affichage des étoiles
                         HStack(spacing: 0) {
-                            ForEach(1..<Int(averageRating.rounded()) , id: \.self) { _ in
+                            ForEach(1..<Int(averageRating.rounded()) + 1, id: \.self) { _ in
                                 Image(systemName: "star.fill")
                                     .foregroundColor(.yellow)
                             }
@@ -38,18 +33,37 @@ struct ReviewsView: View {
                                     .foregroundColor(.yellow)
                             }
                         }
-                        Text("(\(user.reviews.count))")
+                        Text("(\(reviews.count))")
                     }
+                    Spacer()
                 }
-
+                
+                
                 Section(header: Text("Avis")) {
-                    ForEach(user.reviews) { review in
+                    ForEach(reviews) { review in
+                        
                         HStack {
-                            Text(review.comment)
-                            Text("Note : ")
-                            ForEach(1..<Int(review.rating) + 1) { _ in
+                            Image(review.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                            VStack(alignment: .leading) {
+                                Text(review.activity)
+                                    .font(.headline)
+                                Text(review.name)
+                                    .font(.subheadline)
+                                    .foregroundColor(.brown)
+                                Text(review.comment)
+                                    .font(.caption)
+                            }
+                            Spacer()
+                            
+                            
+                            ForEach(1..<Int(review.rating) + 1 ) { _ in
                                 Image(systemName: "star.fill")
                                     .foregroundColor(.yellow)
+                                
                             }
                         }
                     }
@@ -58,3 +72,4 @@ struct ReviewsView: View {
         }
     }
 }
+        

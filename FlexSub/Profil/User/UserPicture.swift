@@ -8,43 +8,45 @@
 //Image de l'utilisateur
 
 import SwiftUI
+import PhotosUI
 
 struct UserPicture: View {
-    @Binding var image: UIImage?
-    @State private var showImagePicker = false
-
+    
+    @Binding var user: User
+    @State private var picture: UIImage?
+    @State private var refreshView = false
+    
     var body: some View {
         VStack {
-            if let image = image {
-                Image(uiImage: image)
+            if let picture = picture {
+                Image(uiImage: picture)
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: 150, height: 150)
+                    .scaledToFit()
+                    .frame(minWidth: 120, maxHeight: 120)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 7)
-                    .onTapGesture {
-                        showImagePicker = true
-                    }
             } else {
                 Image(systemName: "person.circle")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 150, height: 150)
+                    .frame(minWidth: 120, maxHeight: 120)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-                    .shadow(radius: 7)
-                    .onTapGesture {
-                        showImagePicker = true
-                    }
             }
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: $image)
-                .environmentObject(UserViewModel())
+        .onAppear {
+            picture = user.picture
+            refreshView = true
+            refreshView.toggle()
+            
         }
+        .onChange(of: user.picture) { _, newPicture in
+            picture = newPicture
+        }
+        
     }
 }
+        
+
+
 
 
 // UserPicture(image: $userData.inputImage) sert a appelé l'mage de l'utilisateur
