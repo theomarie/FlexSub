@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 
 @Observable class ActivitiesViewModel {
-    var activities : [Activity] = Activity.sampleData()
+    var activities : [Activity] = []
     var activitiesState: RequestState<[Activity]> = .idle
     var searchText: String = ""
     var selectedCategory: Category = .all
@@ -27,7 +27,7 @@ import FirebaseFirestore
     
 
        func addActivity(activity: Activity) {
-           activities.append(activity)
+          // activities.append(activity)
            addActivityToFirestore(activity: activity)
        }
 
@@ -86,6 +86,9 @@ import FirebaseFirestore
                     var dbQuery: Query = FirebaseManager.shared.db.collection("activities")
                         .whereField("status", isEqualTo: status)
                         .whereField("ownerId", isNotEqualTo: userId)
+                    
+                  
+                        
                     
                     if let date = date {
                         let timestamp = Timestamp(date: date)

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 
 
 
@@ -18,17 +18,14 @@ struct ContentView: View {
     
     
     var body: some View {
+        
         TabView {
             Tab("Activités", systemImage: "star") {
-                NavigationStack() {
-                    ActivitiesView(activitiesViewModel: activitiesViewModel)
-                }
+                ActivitiesView(activitiesViewModel: activitiesViewModel)
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                NavigationStack() {
                     MyAdsView(activitiesViewModel: activitiesViewModel)
-                }
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
@@ -42,10 +39,10 @@ struct ContentView: View {
                 
             }
         }
-       
-       
     }
+        
 }
+
    
 
 #Preview {

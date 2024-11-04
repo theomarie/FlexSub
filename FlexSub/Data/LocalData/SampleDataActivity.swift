@@ -17,7 +17,7 @@ extension Activity {
                 id:  UUID().uuidString,
                 title: "Basic fit - Fitness",
                 ownerId: users().randomElement()!.id,
-                participant: nil ,
+                participantid: "" ,
                 price: 5.0,
                 date: Date(),
                 category: .sport,
@@ -36,7 +36,7 @@ extension Activity {
                 id:  UUID().uuidString,
                 title: "Pathe - Joker 2",
                 ownerId: users().randomElement()!.id,
-                participant: nil,
+                participantid: "",
                 price: 3.0,
                 date: Date().addingTimeInterval(86400), // Activité le lendemain
                 category: .cinema,
@@ -55,7 +55,7 @@ extension Activity {
                 id:  UUID().uuidString,
                 title: "Séance Moi moche et Méchant",
                 ownerId: users().randomElement()!.id,
-                participant: nil,
+                participantid: "",
                 price: 3.50,
                 date: Date().addingTimeInterval(86400), // Activité le lendemain
                 category: .cinema,
@@ -75,7 +75,7 @@ extension Activity {
                 id: UUID().uuidString,
                 title: "Jeu de paume - Exposition",
                 ownerId: users().randomElement()!.id,
-                participant: nil,
+                participantid: "",
                 price: 3.0,
                 date: Date().addingTimeInterval(86400), // Activité le lendemain
                 category: .museum,
@@ -95,7 +95,7 @@ extension Activity {
                 id: UUID().uuidString,
                 title: "Mad Paris - Exposition ",
                 ownerId: users().randomElement()!.id,
-                participant: nil,
+                participantid: "",
                 price: 4.0,
                 date: Date().addingTimeInterval(86400), // Activité le lendemain
                 category: .museum,
@@ -115,7 +115,7 @@ extension Activity {
                 id: UUID().uuidString,
                 title: "Le Temp Machines - CLAUDE ",
                 ownerId: users().randomElement()!.id,
-                participant: nil,
+                participantid: "",
                 price: 2.0,
                 date: Date().addingTimeInterval(86400), // Activité le lendemain
                 category: .concert,

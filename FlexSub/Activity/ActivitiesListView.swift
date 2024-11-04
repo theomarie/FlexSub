@@ -12,7 +12,8 @@ import SwiftUI
 struct ActivitiesListView: View {
     @Bindable var activitiesViewModel: ActivitiesViewModel
     @State private var selectedActivity: Activity? // Pour suivre l'activité sélectionnée
-
+    
+    
     var body: some View {
         VStack {
             Picker("Catégorie", selection: $activitiesViewModel.selectedCategory) {
@@ -22,19 +23,22 @@ struct ActivitiesListView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
-
+            
             List(activitiesViewModel.filteredActivities) { activity in
                 ActivityRow(activity: activity)
                     .onTapGesture {
-                        selectedActivity = activity
+                        // Ne permet la sélection de l'activité que si l'utilisateur est connecté
+                            selectedActivity = activity
                     }
             }
             .listStyle(PlainListStyle())
+            
         }
         .navigationDestination(item: $selectedActivity) { activity in
-                       ActivityReservationView(activity: activity)
-                   }    }
+            ActivityReservationView(activity: activity, userId: activity.ownerId)
         
+        }
+    }
 }
 
 #Preview {
