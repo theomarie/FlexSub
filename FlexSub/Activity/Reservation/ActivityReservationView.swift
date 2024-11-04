@@ -18,23 +18,19 @@ struct ActivityReservationView: View {
            ScrollView {
                VStack(alignment: .leading, spacing: 16) {
                    // Chargement de l'utilisateur
-                   if userViewModel.isLoading {
-                       ProgressView("Chargement de l'utilisateur...")
-                   } else if let errorMessage = userViewModel.errorMessage {
-                       Text("Erreur : \(errorMessage)").foregroundColor(.red)
-                   }
-                   else if let user = userViewModel.user {
-                      // UserPicture(user: user)
-                       
-                       VStack(alignment: .leading) {
-                           Text("Proposé par : \(user.username)")
-                               .font(.headline)
-                       }
-                       .padding(.leading, 8)
-                   }
-                   /*
-                   
-                    */
+                    if userViewModel.isLoading {
+                    ProgressView("Chargement de l'utilisateur...")
+                } else if let errorMessage = userViewModel.errorMessage {
+                    Text("Erreur : \(errorMessage)").foregroundColor(.red)
+                } else if let user = userViewModel.user {
+                    UserPicture(user: user)
+
+                    VStack(alignment: .leading) {
+                        Text("Proposé par : \(user.username)")
+                            .font(.headline)
+                    }
+                    .padding(.leading, 8)
+                }
                    
                    Divider()
                    
