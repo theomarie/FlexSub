@@ -18,7 +18,7 @@ struct ActivityReservationView: View {
            ScrollView {
                VStack(alignment: .leading, spacing: 16) {
                    // Chargement de l'utilisateur
-                    if userViewModel.isLoading {
+                   if userViewModel.userState.isLoading {
                     ProgressView("Chargement de l'utilisateur...")
                 } else if let errorMessage = userViewModel.errorMessage {
                     Text("Erreur : \(errorMessage)").foregroundColor(.red)

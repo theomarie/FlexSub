@@ -29,7 +29,7 @@ class User: Identifiable {
                profileImageUrl = newValue.url
            }
        }
-    
+    /*
     static func fetchUserById(id: String) async -> RequestState<User> {
            // Utilisation de RequestManager pour gérer l'état de la requête
            return await RequestManager.shared.perform {
@@ -56,6 +56,7 @@ class User: Identifiable {
                return User(id: id, username: username, email: email, firstName: firstName, lastName: lastName, profileImageUrl: profileImageUrl, address: address)
            }
        }
+     */
     
     
     
