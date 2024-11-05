@@ -39,6 +39,9 @@ struct Activity: Identifiable, Codable, Hashable {
                 return "star.fill" // Icône par défaut pour "Tous"
             }
         }
+    
+    
+    
 }
 
 

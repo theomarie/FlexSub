@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2451D26E2CDA539000BEC275 /* ExyteChat in Frameworks */ = {isa = PBXBuildFile; productRef = 2451D26D2CDA539000BEC275 /* ExyteChat */; };
 		F1C8D53C2CCA7EDE0017E359 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53B2CCA7EDE0017E359 /* FirebaseAnalytics */; };
 		F1C8D53E2CCA7EDE0017E359 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53D2CCA7EDE0017E359 /* FirebaseAuth */; };
 		F1C8D5402CCA7EDE0017E359 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53F2CCA7EDE0017E359 /* FirebaseCore */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2451D26E2CDA539000BEC275 /* ExyteChat in Frameworks */,
 				F1C8D5462CCA7EDE0017E359 /* FirebaseMessaging in Frameworks */,
 				F1C8D53C2CCA7EDE0017E359 /* FirebaseAnalytics in Frameworks */,
 				F1C8D5402CCA7EDE0017E359 /* FirebaseCore in Frameworks */,
@@ -89,6 +91,7 @@
 				F1C8D5432CCA7EDE0017E359 /* FirebaseFirestore */,
 				F1C8D5452CCA7EDE0017E359 /* FirebaseMessaging */,
 				F1C8D5472CCA7EDE0017E359 /* FirebaseStorage */,
+				2451D26D2CDA539000BEC275 /* ExyteChat */,
 			);
 			productName = FlexSub;
 			productReference = 247474332CC918CF00C2B364 /* FlexSub.app */;
@@ -120,6 +123,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2451D26C2CDA539000BEC275 /* XCRemoteSwiftPackageReference "Chat" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 247474342CC918CF00C2B364 /* Products */;
@@ -355,6 +359,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2451D26C2CDA539000BEC275 /* XCRemoteSwiftPackageReference "Chat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/Chat.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.7;
+			};
+		};
 		247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -366,6 +378,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2451D26D2CDA539000BEC275 /* ExyteChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2451D26C2CDA539000BEC275 /* XCRemoteSwiftPackageReference "Chat" */;
+			productName = ExyteChat;
+		};
 		F1C8D53B2CCA7EDE0017E359 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

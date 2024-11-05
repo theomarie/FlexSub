@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 extension Activity {
     static func sampleData() -> [Activity] {
         let users = User.sampleData
@@ -139,3 +139,4 @@ extension Activity {
         
     }
 }
+*/
