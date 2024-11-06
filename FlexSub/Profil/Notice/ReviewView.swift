@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ReviewView: View {
-    @EnvironmentObject var userData: UserData
+    @Environment(AuthViewModel.self) var viewModel
     
     var body: some View {
         
@@ -15,7 +15,7 @@ struct ReviewView: View {
         NavigationStack {
             List {
                 HStack {
-                    UserPicture(user: $userData.user)
+                    UserPicture()
                     Spacer()
                     VStack(alignment: .center){
                         HStack() {

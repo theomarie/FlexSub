@@ -23,27 +23,26 @@ import FirebaseStorage
 //}
 
 
-class UserData: ObservableObject {
-    @Published var user: User
-    private var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
-    
-    var firebaseUser: FirebaseAuth.User? {
-        Auth.auth().currentUser
-    }
-    
-    init() {
-        let firebaseUser = Auth.auth().currentUser
-        
-            self.user = FlexSub.User(
-                id: firebaseUser!.uid,
-                username: firebaseUser!.displayName ?? "",
-                email: firebaseUser!.email ?? "",
-                password: "",
-                firstName: "",
-                lastName: "",
-                picture: nil,
-                address: ""
-            )
+//class UserData: ObservableObject {
+//    @Published var user: User
+//    private var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
+//    
+//    var firebaseUser: FirebaseAuth.User? {
+//        Auth.auth().currentUser
+//    }
+//    
+//    init() {
+//        let firebaseUser = Auth.auth().currentUser
+//        
+//        self.user = FlexSub.User(
+//            id: firebaseUser!.uid,
+//            username: firebaseUser!.displayName ?? "",
+//            email: firebaseUser!.email ?? "",
+//            firstName: "", // Remplacez par la valeur appropriée
+//            lastName: "",  // Remplacez par la valeur appropriée
+//            profileImageUrl: String(describing: firebaseUser!.photoURL),
+//            address: ""   // Remplacez par la valeur appropriée
+//        )
         
                    
             
@@ -63,10 +62,10 @@ class UserData: ObservableObject {
             //                )
             
             // Charger l'image de profil depuis Firebase Storage (si nécessaire)
-            Task {
-                
-            }
-        }
+//            Task {
+//                
+//            }
+//        }
         
         
         
@@ -93,9 +92,9 @@ class UserData: ObservableObject {
         //        }
         
         
-        func getProfileImageURL(userId: String) -> URL? {
-            return nil
-        }
-    }
+//        func getProfileImageURL(userId: String) -> URL? {
+//            return nil
+//        }
+//    }
     
 

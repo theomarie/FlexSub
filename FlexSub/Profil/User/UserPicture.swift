@@ -8,45 +8,57 @@
 //Image de l'utilisateur
 
 import SwiftUI
-import PhotosUI
+
+//extension View {
+//    func userPicture(user: User) -> some View {
+//        self.modifier(UserPicture(user: user))
+//    }
+//}
+
+// Un modificateur pour encapsuler la logique de UserPicture
 
 struct UserPicture: View {
-    
-    @Binding var user: User
-    @State private var picture: UIImage?
-    @State private var refreshView = false
+    @Environment(AuthViewModel.self) var viewModel
+    @State private var isPresentingImagePicker = false
+    @State private var inputImage: UIImage?
     
     var body: some View {
         VStack {
-            if let picture = picture {
-                Image(uiImage: picture)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 120, maxHeight: 120)
-                    .clipShape(Circle())
-            } else {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 120, maxHeight: 120)
-                    .clipShape(Circle())
+            if let user = viewModel.currentUser {
+                
+                
+                if let profileImage = user.profileImageUrl, let profileImageURL = URL(string: profileImage) {
+                    AsyncImage(url: profileImageURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 150, height: 150)
+                    }
+                } else {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.gray)
+                }
+                
+//                Button("Modifier l'image") {
+//                    isPresentingImagePicker = true
+//                }
+//                .sheet(isPresented: $isPresentingImagePicker) {
+//                    ImagePicker(image: $inputImage)
+//                }
+//                .onChange(of: inputImage) { _, newValue in
+//                    if let newValue = newValue, let imageData = newValue.jpegData(compressionQuality: 0.8) {
+//                        // Télécharger imageData vers Firebase Storage et mettre à jour user.profileImageUrl
+//                        // ...
+//                    }
+//                }
             }
         }
-        .onAppear {
-            picture = user.picture
-            refreshView = true
-            refreshView.toggle()
-            
-        }
-        .onChange(of: user.picture) { _, newPicture in
-            picture = newPicture
-        }
-        
     }
 }
-        
-
-
-
-
-// UserPicture(image: $userData.inputImage) sert a appelé l'mage de l'utilisateur

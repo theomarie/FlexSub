@@ -11,13 +11,12 @@ import FirebaseAuth
 
 struct AuthSecureScreen: View {
     @Environment(AuthViewModel.self) var authViewModel: AuthViewModel
-    
+
     var userId: String? {
             Auth.auth().currentUser?.uid
         }
     
     var body: some View {
-        NavigationStack() {
             Group {
                 if authViewModel.isLoading {
                     // Affiche un indicateur de chargement lorsque isLoading est vrai
@@ -27,7 +26,7 @@ struct AuthSecureScreen: View {
                 } else {
                     // Lorsque le chargement est terminé, on affiche soit la Home, soit AuthView
                     if authViewModel.isLoggedIn {
-                            ContentView()
+                        ContentView()
                         
                     } else {
                         AuthLoginView()
@@ -37,7 +36,6 @@ struct AuthSecureScreen: View {
             .onAppear {
                 authViewModel.checkIfUserIsLoggedIn() // Vérifie l'état de connexion lorsque la vue apparaît
             }
-        }
         }
     }
 

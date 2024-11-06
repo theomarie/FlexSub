@@ -10,7 +10,7 @@ import MapKit
 
 struct ActivityReservationView: View {
     let activity: Activity
-    //@Environment(AuthViewModel.self) var authViewModel
+    @Environment(AuthViewModel.self) var authViewModel
     let userId: String
     @State var userViewModel = UserViewModel()
     
@@ -23,7 +23,7 @@ struct ActivityReservationView: View {
                 } else if let errorMessage = userViewModel.errorMessage {
                     Text("Erreur : \(errorMessage)").foregroundColor(.red)
                 } else if let user = userViewModel.user {
-                    UserPicture(user: user)
+                    UserPicture()
 
                     VStack(alignment: .leading) {
                         Text("Proposé par : \(user.username)")

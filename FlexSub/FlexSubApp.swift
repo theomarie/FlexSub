@@ -22,16 +22,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct FlexSubApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var userData = UserData()
+    
    
 
     
     var body: some Scene {
+        
         WindowGroup {
             AuthSecureScreen()
                 .environment(AuthViewModel())
                 .environment(ActivitiesViewModel())
-                .environmentObject(userData)
+               
         }
     }
 }

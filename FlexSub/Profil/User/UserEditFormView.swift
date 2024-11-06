@@ -57,136 +57,148 @@ import FirebaseFirestore
 //
 
 
+
+
 struct UserEditFormView: View {
-    @Binding var user: FlexSub.User
-    @EnvironmentObject var userData: UserData
+    
+    
+    @State var user: User // Déclarer user comme @State
     @Environment(\.dismiss) var dismiss
+    @Environment(AuthViewModel.self) var viewModel
     @State private var showImagePicker = false
+    @State private var isPresentingImagePicker = false
     @State private var inputImage: UIImage?
     @State private var selectedImage: UIImage?
-    @State private var isLoading = false
-  
+    
     
     
     var body: some View {
-        
         VStack {
-            if let selectedImage = selectedImage {
-                Image(uiImage: selectedImage)
-                    .resizable()
+            if let profileImage = user.profileImageUrl, let profileImageURL = URL(string: profileImage) {
+                AsyncImage(url: profileImageURL)
                     .scaledToFit()
-                    .frame(minWidth: 120, maxHeight: 120)
-                    .clipShape(Circle())
-            } else if let userPicture = user.picture {
-                Image(uiImage: userPicture)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 120, maxHeight: 120)
+                    .frame(minWidth: 100, maxHeight: 100)
                     .clipShape(Circle())
             } else {
                 Image(systemName: "person.circle")
                     .resizable()
                     .scaledToFit()
-                    .frame(minWidth: 120, maxHeight: 120)
+                    .frame(minWidth: 100, maxHeight: 100)
                     .clipShape(Circle())
             }
-        
-            Button("Changer d'image") {
-                showImagePicker = true
+            
+            Button("Modifier l'image") {
+                isPresentingImagePicker = true
             }
-            .sheet(isPresented: $showImagePicker) {
+            .sheet(isPresented: $isPresentingImagePicker) {
                 ImagePicker(image: $inputImage)
-                    .environmentObject(userData)
             }
             .onChange(of: inputImage) { _, newValue in
                 if let newValue = newValue {
-                    user.picture = newValue
+                   
+                    if newValue.jpegData(compressionQuality: 0.8) != nil {
+                        // Mettre à jour l'URL de l'image dans Firebase Storage (à implémenter)
+                        
+                        
+                        user.profileImageUrl = "nouvelle-url-de-l-image"
+                    }
                 }
             }
+            //            .onChange(of: inputImage) { _, newValue in
+            //                if let newValue = newValue {
+            //                    if let imageData = newValue.jpegData(compressionQuality: 0.8) {
+            //                        user.userImage = imageData
+            //                        selectedImage = newValue
+            //                    }
+            //                }
+        }
+        
+        TextField("Nom d'utilisateur", text: $user.username)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 3)
+            .padding(.bottom, 10)
+        TextField("Email", text: $user.email) // Utiliser $user.email
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 3)
+            .padding(.bottom, 10)
+        
+        //                SecureField("Mot de passe", text: $user.password)
+        //                    .padding()
+        //                    .background(Color.white)
+        //                    .cornerRadius(12)
+        //                    .shadow(radius: 3)
+        //                    .padding(.bottom, 10)
+        TextField("Prénom", text: $user.firstName)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 3)
+            .padding(.bottom, 10)
+        TextField("Nom", text: $user.lastName)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 3)
+            .padding(.bottom, 10)
+        TextField("Adresse", text: $user.address)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 3)
+            .padding(.bottom, 10)
+        
+        Button("Enregistrer") {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(user.id)
+            dismiss()
             
-            
-            
-            TextField("Nom d'utilisateur", text: $user.username)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            TextField("Email", text: $userData.user.email)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            SecureField("Mot de passe", text: $user.password)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            TextField("Prénom", text: $user.firstName)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            TextField("Nom", text: $user.lastName)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            TextField("Adresse", text: $user.address)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(radius: 3)
-                .padding(.bottom, 10)
-            
-            Button("Enregistrer") {
-                let db = Firestore.firestore()
-                let userRef = db.collection("users").document(user.id)
-                dismiss()
-                    
-                userRef.updateData([
-                    "username": user.username,
-                    "email": user.email,
-                    "password": user.password,
-                    "firstName": user.firstName,
-                    "lastName": user.lastName,
-                    "address": user.address
-                    
-                ]) { error in
-                    if let error = error {
-                        print("Erreur lors de la mise à jour Firestore : \(error)")
-                    } else {
-                        Auth.auth().currentUser?.sendEmailVerification(beforeUpdatingEmail: user.email) { error in
-                            if let error = error {
-                                print("Erreur lors de l'envoi de l'email de vérification : \(error)")
-                            } else {
-                                print("Email de vérification envoyé avec succès !")
-
-                                // 2. Mettre à jour le mot de passe (si nécessaire)
-                                Auth.auth().currentUser?.updatePassword(to: user.password) { error in
-                                    isLoading = false
-                                    if let error = error {
-                                        print("Erreur lors de la mise à jour du mot de passe : \(error)") // Gérez l'erreur
-                                    } else {
-                                        print("Informations de connexion mises à jour avec succès !")
-                                        userData.user = user
-                                        dismiss()
-                                    }
-                                }
-                            }
+            userRef.updateData([
+                "username": user.username,
+                "email": user.email,
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "address": user.address
+                
+            ]) { error in
+                if let error = error {
+                    print("Erreur lors de la mise à jour Firestore : \(error)")
+                } else {
+                    Auth.auth().currentUser?.sendEmailVerification(beforeUpdatingEmail: user.email) { error in
+                        if let error = error {
+                            print("Erreur lors de l'envoi de l'email de vérification : \(error)")
+                        } else {
+                            print("Email de vérification envoyé avec succès !")
                         }
                     }
                 }
             }
-            .foregroundStyle(.white)
-            .padding()
-            .background(Color.blue.opacity(1))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            
+            
+            
         }
-        .padding()
+        .onAppear {
+            // Initialiser user avec les données de l'utilisateur actuel
+            guard let firebaseUser = Auth.auth().currentUser else {
+                // Gérer le cas où l'utilisateur n'est pas connecté
+                return
+            }
+            
+            user = User(
+                id: firebaseUser.uid,
+                username: firebaseUser.displayName ?? "",
+                email: firebaseUser.email ?? "",
+                firstName: "", // Remplacez par la valeur appropriée
+                lastName: "", // Remplacez par la valeur appropriée
+                profileImageUrl: "", // Remplacez par la valeur appropriée
+                address: "" // Remplacez par la valeur appropriée
+            )
+        }
     }
 }
+       
+

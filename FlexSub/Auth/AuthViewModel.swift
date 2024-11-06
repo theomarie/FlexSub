@@ -80,7 +80,7 @@ import FirebaseStorage
                     "email": user.email,
                     "firstName": user.firstName,
                     "lastName": user.lastName,
-                    "address": user.address ?? "",
+                    "address": user.address,
                     "profileImageUrl": user.userImage.url ?? UserImage.defaultUrl
                 ]
                 

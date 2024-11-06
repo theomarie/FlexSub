@@ -34,10 +34,10 @@ struct ActivitiesListView: View {
             .listStyle(PlainListStyle())
             
         }
-        .navigationDestination(item: $selectedActivity) { activity in
-            ActivityReservationView(activity: activity, userId: activity.ownerId)
-        
-        }
+//        .navigationDestination(item: $selectedActivity) { activity in
+//            ActivityReservationView(activity: activity, userId: activity.ownerId)
+//        
+//        }
     }
 }
 
