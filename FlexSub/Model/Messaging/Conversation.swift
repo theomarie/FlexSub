@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-public struct Conversation: Identifiable, Hashable, Encodable {
+public struct Conversation: Identifiable, Hashable, Codable{
     public let id: String
     public let userMessaging: [UserMessaging]
     public let title: String

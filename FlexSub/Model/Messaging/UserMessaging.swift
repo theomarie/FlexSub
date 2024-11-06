@@ -8,7 +8,7 @@ import Foundation
 import ExyteChat
 
 
-public struct UserMessaging: Codable, Identifiable, Hashable {
+public struct UserMessaging: Identifiable, Hashable, Codable {
     public let id: String
     public let name: String
     public let avatarURL: URL?

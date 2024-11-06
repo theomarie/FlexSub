@@ -10,9 +10,9 @@ import SwiftUI
 import FirebaseFirestore
 import ExyteChat
 
-public struct Message: Identifiable, Hashable, Encodable {
+public struct Message: Identifiable, Hashable, Codable {
     
-    public enum StatusMessage: Hashable, Equatable, Encodable {
+    public enum StatusMessage: Hashable, Equatable, Codable {
            case sending
            case sent
            case read
