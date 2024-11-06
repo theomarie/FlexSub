@@ -11,10 +11,17 @@ import FirebaseFirestore
 
 
 @Observable class ActivitiesViewModel {
+    
+    // Exemple d'activité pour les preView
     var activities : [Activity] = []
+    
+    //  Activity(id: "734", title: "Séance Basic-Fit", ownerId: "3567", date: Date.now, address: Address(streetAddress: "14 bld saint germain", city: "las vegas", formattedAddress: "14 bld saint germain, las vegas", zipCode: "42905", lng: 45.45, lat: 312.34)
+    
+    
     var activitiesState: RequestState<[Activity]> = .idle
     var searchText: String = ""
     var selectedCategory: Category = .all
+    
     
     // local
     var filteredActivities: [Activity] {
@@ -46,11 +53,34 @@ import FirebaseFirestore
                     print("Activité et adresse ajoutées avec succès !")
                 }
             }
+        
         } catch {
             print("Erreur lors de l'encodage de l'activité : \(error.localizedDescription)")
         }
     }
     
+
+    func deleteActivityToFirestore(activity: Activity) {
+        do {
+            // Encode l'activité complète avec l'adresse incluse
+            let activityData = try Firestore.Encoder().encode(activity)
+            
+            FirebaseManager.shared.db.collection("activities").document(activity.id).delete() { error in
+                if let error = error {
+                    print("Erreur lors de la suppression de l'activité : \(error.localizedDescription)")
+                } else {
+                    // supprimer l'activité
+                    self.activities.removeAll(where: {$0 == activity})
+//                    self.filteredActivities.removeAll(where: {$0 == activity})
+                    print("Activité et adresse supprimées avec succès !")
+                }
+            }
+        } catch {
+            print("Erreur lors de l'encodage de l'activité : \(error.localizedDescription)")
+        }
+    }
+    
+
     func fetchMyActivities(for userId: String) {
         
         FirebaseManager.shared.db.collection("activities")

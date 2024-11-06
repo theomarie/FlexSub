@@ -1,5 +1,5 @@
 {
-  "originHash" : "9b581613fa3a27df039ff5fab0911ccad913eb51d22d044b403e23c83f35e772",
+  "originHash" : "0d8c0fb7c74a2f0b83c375afba4e5747e8240963c296857dbf8885f59784f702",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -31,7 +31,7 @@
     {
       "identity" : "chat",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/Chat.git",
+      "location" : "https://github.com/exyte/Chat",
       "state" : {
         "revision" : "5d6a7c6f74761a0eda2816a50c4912d86f2355eb",
         "version" : "2.0.7"

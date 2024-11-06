@@ -24,19 +24,32 @@ struct ActivitiesListView: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
             
-            List(activitiesViewModel.filteredActivities) { activity in
-                ActivityRow(activity: activity)
-                    .onTapGesture {
-                        // Ne permet la sélection de l'activité que si l'utilisateur est connecté
+            List{
+                
+                Text(activitiesViewModel.activities.count > 1 ? "Vous avez partagé \(activitiesViewModel.activities.count) activités" : "Vous avez partagé \(activitiesViewModel.activities.count) activité ")
+                
+                ForEach(activitiesViewModel.filteredActivities) { activity in
+                    ActivityRow(activity: activity)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                activitiesViewModel.deleteActivityToFirestore(activity: activity)
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+
+                        }
+                        .onTapGesture {
+                            // Ne permet la sélection de l'activité que si l'utilisateur est connecté
                             selectedActivity = activity
-                    }
+                        }
+                }
+    
             }
             .listStyle(PlainListStyle())
-            
         }
         .navigationDestination(item: $selectedActivity) { activity in
             ActivityReservationView(reservationViewModel: ActivityReservationViewModel(activity: activity, activitieState: .idle), userId: activity.ownerId)
-        
+            
         }
     }
 }
