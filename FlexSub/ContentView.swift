@@ -31,7 +31,8 @@ struct ContentView: View {
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
-                ChatView(conversationId: "21EC3386-52B4-42D6-8C86-86D9491FC072")
+                ChatActivityView(conversationId: "21EC3386-52B4-42D6-8C86-86D9491FC072",
+                currentUserId: "wYndYiYuFhMLhFFKdoEQgqy5w7z2")
             }
 
             Tab("Profil", systemImage: "person.crop.square") {
