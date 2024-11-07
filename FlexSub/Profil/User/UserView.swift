@@ -14,23 +14,20 @@ import FirebaseAuth
 import SwiftUI
 
 struct UserView: View {
-    
-    
     @Environment(AuthViewModel.self) var viewModel
     @State private var showEditForm = false
-    @State private var refreshView = false
     
+
+   
+
     var body: some View {
-        
-        
         VStack {
+            // Vérifier si l'utilisateur est chargé
             if let user = viewModel.currentUser {
-                
-                
-                HStack{
+                HStack {
                     Spacer()
-                    UserPicture()
-                    VStack{
+                    UserPicture() // Passer l'utilisateur à UserPicture
+                    VStack {
                         Text(" \(user.username)")
                         Text("\(user.email)")
                         NavigationLink(destination: ReviewView()) {
@@ -39,35 +36,27 @@ struct UserView: View {
                     }
                     Spacer()
                 }
-                
-                
                 Spacer()
-                
+
                 Button("Déconnexion") {
                     viewModel.logout()
                 }
                 .toolbar {
                     NavigationLink(destination: UserEditFormView(user: user)) {
                         Label("Modifier le profil", systemImage: "pencil")
-                        //                    .navigationDestination(isPresented: $showEditForm) {
-                        //                        UserEditFormView(user: user)
                     }
                 }
-                
-                
                 .navigationTitle("Profil")
-                
-                
-                .onAppear {
-                    refreshView = true
-                    refreshView.toggle()
-                    //            userData.objectWillChange.send()
-                }
-                .onChange(of: refreshView) { _, _ in
-                }
+            } else {
+                // Afficher un indicateur de chargement pendant le chargement de l'utilisateur
+                ProgressView()
             }
         }
-        
+        .onAppear {
+            // Charger l'utilisateur depuis viewModel
+        }
+    }
+}
         
         
         
@@ -118,5 +107,5 @@ struct UserView: View {
         //
         //
         //
-    }
-}
+    
+

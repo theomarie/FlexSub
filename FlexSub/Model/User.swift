@@ -10,7 +10,8 @@ import SwiftUI
 import FirebaseFirestore
 
 
-class User: Identifiable {
+class User: Identifiable, ObservableObject {
+   
     var id: String
     var username: String
     var email: String

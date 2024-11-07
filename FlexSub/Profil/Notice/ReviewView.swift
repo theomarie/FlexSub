@@ -9,6 +9,7 @@ import SwiftUI
 struct ReviewView: View {
     @Environment(AuthViewModel.self) var viewModel
     
+    
     var body: some View {
         
         let averageRating = reviews.reduce(0) { $0 + $1.rating } / Double(reviews.count)

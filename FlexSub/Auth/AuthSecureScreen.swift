@@ -11,7 +11,6 @@ import FirebaseAuth
 
 struct AuthSecureScreen: View {
     @Environment(AuthViewModel.self) var authViewModel: AuthViewModel
-
     var userId: String? {
             Auth.auth().currentUser?.uid
         }

@@ -12,6 +12,7 @@ import Combine
 
 struct ImagePicker : UIViewControllerRepresentable {
     @Binding var image : UIImage?
+    @Binding var imageData : Data?
     
     func makeUIViewController(context : Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()

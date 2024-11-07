@@ -174,4 +174,19 @@ import FirebaseStorage
             return user
         }
     }
+    
+    func uploadProfileImage(_ imageData: Data, userId: String) async throws -> String {
+        let storageRef = Storage.storage().reference().child("profileImages/\(userId).jpg")
+
+        // Télécharger l'image avec les métadonnées
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        _ = try await storageRef.putDataAsync(imageData, metadata: metadata)
+
+        // Obtenir l'URL de téléchargement
+        return try await storageRef.downloadURL().absoluteString
+    }
 }
+
+
+

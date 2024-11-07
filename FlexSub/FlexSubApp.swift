@@ -32,6 +32,7 @@ struct FlexSubApp: App {
             AuthSecureScreen()
                 .environment(AuthViewModel())
                 .environment(ActivitiesViewModel())
+            
                
         }
     }
