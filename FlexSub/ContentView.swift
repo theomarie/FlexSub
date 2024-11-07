@@ -23,23 +23,30 @@ struct ContentView: View {
         
         TabView {
             Tab("Activités", systemImage: "star") {
-                ActivitiesView(activitiesViewModel: activitiesViewModel)
+                NavigationStack {
+                    ActivitiesView(activitiesViewModel: activitiesViewModel)
+                }
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                MyAdsView(activitiesViewModel: activitiesViewModel)
+                NavigationStack {
+                    MyAdsView(activitiesViewModel: activitiesViewModel)
+                }
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
-             //   ChatActivityView(conversationId: "21EC3386-52B4-42D6-8C86-86D9491FC072",
-                               //  currentUserId: "wYndYiYuFhMLhFFKdoEQgqy5w7z2")
-                ConversationListView()
+                NavigationStack {
+                    ConversationListView()
+                }
             }
             
             Tab("Profil", systemImage: "person.crop.square") {
-                Button("Logout") {
-                    authViewModel.logout()
+                NavigationStack {
+                    Button("Logout") {
+                        authViewModel.logout()
+                    }
                 }
+                
             }
         }
         .onAppear {

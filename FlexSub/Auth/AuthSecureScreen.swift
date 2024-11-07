@@ -17,7 +17,6 @@ struct AuthSecureScreen: View {
         }
     
     var body: some View {
-        NavigationStack() {
             Group {
                 if authViewModel.isLoading {
                     // Affiche un indicateur de chargement lorsque isLoading est vrai
@@ -38,7 +37,7 @@ struct AuthSecureScreen: View {
                 authViewModel.checkIfUserIsLoggedIn() // Vérifie l'état de connexion lorsque la vue apparaît
             }
         }
-        }
+        
     }
 
 

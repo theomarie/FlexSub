@@ -27,6 +27,8 @@ struct ActivitiesView: View {
                     ActivitiesListView(activitiesViewModel: activitiesViewModel)
                     
                 }
+                .navigationTitle("Mes activités")
+
             case .error(let error):
                 // ErrorView(error: error)
                 Text("Error: \(error.localizedDescription)")

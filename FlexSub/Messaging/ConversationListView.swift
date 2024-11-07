@@ -18,6 +18,7 @@ struct ConversationListView: View {
     }
 
     var body: some View {
+        VStack {
             List(viewModel.conversations, id: \.id) { conversation in
                 NavigationLink(destination: ChatActivityView(conversationId: conversation.id, currentUserId: authViewModel.currentUser?.id ?? "")) {
                     ConversationRow(conversation: conversation)
@@ -26,10 +27,14 @@ struct ConversationListView: View {
             .onAppear {
                 if let user = authViewModel.currentUser {
                     viewModel.fetchConversations(for: user.id)
-
+                    
                 }
             }
         }
+        .navigationTitle("Mes activités")
+
+        }
+    
        
     
 
