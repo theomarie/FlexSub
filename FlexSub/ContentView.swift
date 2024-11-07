@@ -14,7 +14,7 @@ struct ContentView: View {
     // environnement de mon activites
     @Environment(AuthViewModel.self) var authViewModel
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
-   
+    
     // code Abdelghani
     @StateObject var userData = UserData()
     // Fin du code
@@ -27,28 +27,35 @@ struct ContentView: View {
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                    MyAdsView(activitiesViewModel: activitiesViewModel)
+                MyAdsView(activitiesViewModel: activitiesViewModel)
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
-                ChatActivityView(conversationId: "21EC3386-52B4-42D6-8C86-86D9491FC072",
-                currentUserId: "wYndYiYuFhMLhFFKdoEQgqy5w7z2")
+             //   ChatActivityView(conversationId: "21EC3386-52B4-42D6-8C86-86D9491FC072",
+                               //  currentUserId: "wYndYiYuFhMLhFFKdoEQgqy5w7z2")
+                ConversationListView()
             }
-
+            
             Tab("Profil", systemImage: "person.crop.square") {
                 Button("Logout") {
                     authViewModel.logout()
                 }
             }
         }
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            
+        }
     }
-        
+    
 }
 
-   
+
 
 #Preview {
-  
+    
     ContentView()
-     
+    
 }

@@ -10,8 +10,8 @@ import SwiftUI
 struct ActivitiesListView: View {
     @Bindable var activitiesViewModel: ActivitiesViewModel
     @State private var selectedActivity: Activity? // Pour suivre l'activité sélectionnée
-    @Environment(AuthViewModel.self) var authViewModel
-    
+    //@Environment(AuthViewModel.self) var authViewModel
+    var isMyActivities = false
     
     var body: some View {
         VStack {
@@ -26,12 +26,10 @@ struct ActivitiesListView: View {
             
             List{
                 
-                Text(activitiesViewModel.activities.count > 1 ? "Vous avez partagé \(activitiesViewModel.activities.count) activités" : "Vous avez partagé \(activitiesViewModel.activities.count) activité ")
+                if isMyActivities{Text(activitiesViewModel.activities.count > 1 ? "Vous avez partagé \(activitiesViewModel.activities.count) activités" : "Vous avez partagé \(activitiesViewModel.activities.count) activité ")}
                 
                 ForEach(activitiesViewModel.filteredActivities) { activity in
                     ActivityRow(activity: activity)
-                    
-                    
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {
                                 activitiesViewModel.deleteActivityToFirestore(activity: activity)
