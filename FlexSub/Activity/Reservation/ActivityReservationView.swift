@@ -119,29 +119,24 @@ struct ActivityReservationView: View {
         
         if case .success = reservationViewModel.activitiyState {
             print("Success")
-            /*
-            if let profileImageUrl = URL(string: user.profileImageUrl!) {
-                let user1 = UserMessaging(id: user.id, name: user.username, avatarURL: profileImageUrl, isCurrentUser: false)
-                
-                print(user1)
-
-                if let profileImageUrlUser2 = URL(string: user2.profileImageUrl!) {
-                    
-
-                    let userMessaging2 = UserMessaging(id: user2.id, name: user2.username, avatarURL: profileImageUrlUser2, isCurrentUser: false)
-                    print(userMessaging2)
-                    Conversation.createChatBetweenUsers(user1: user1, user2: userMessaging2, activityTitle: reservationViewModel.activity.title, activityId: reservationViewModel.activity.id)
-                   
+            let user1 = ChatParticipant(id: user.id, name: user.username, avatarURL: user.profileImageUrl, isCurrentUser: false)
+            
+            let userMessaging2 = ChatParticipant(id: user2.id, name: user2.username, avatarURL: user2.profileImageUrl, isCurrentUser: false)
+            
+            
+            Conversation.createChatBetweenUsers(user1: user1, user2: userMessaging2, activityTitle: reservationViewModel.activity.title, activityId: reservationViewModel.activity.id)
+            
+          
                 } else {
                     print("Erreur : L'URL de l'image de profil est invalide.")
                 }
-             */
+             
                 
                
                 dismiss() // Ferme la vue si la requête est réussie
             }
         }
-    }
+    
     
     // Fonction pour ouvrir l'adresse dans Google Maps
     func openInGoogleMaps(for address: Address) {

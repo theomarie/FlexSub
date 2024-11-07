@@ -36,6 +36,20 @@ struct Conversation: Codable, Identifiable {
                 return "star.fill" // Icône par défaut pour "Tous"
             }
         }
+    
+    static func createChatBetweenUsers(user1: ChatParticipant, user2: ChatParticipant, activityTitle: String, activityId: String) {
+        let conversation = Conversation(id: activityId, title: activityTitle, userMessaging: [user1, user2])
+
+            // Ajoute la conversation à Firestore
+            let db = Firestore.firestore()
+            db.collection("conversations").document(conversation.id).setData(try! Firestore.Encoder().encode(conversation)) { error in
+                if let error = error {
+                    print("Erreur lors de la création de la conversation : \(error)")
+                } else {
+                    print("Conversation créée avec succès : \(conversation.id)")
+                }
+            }
+        }
 }
  
 

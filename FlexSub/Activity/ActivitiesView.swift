@@ -27,7 +27,7 @@ struct ActivitiesView: View {
                     ActivitiesListView(activitiesViewModel: activitiesViewModel)
                     
                 }
-                .navigationTitle("Mes activités")
+                .navigationTitle("Activités")
 
             case .error(let error):
                 // ErrorView(error: error)

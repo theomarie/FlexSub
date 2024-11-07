@@ -31,7 +31,7 @@ struct ConversationListView: View {
                 }
             }
         }
-        .navigationTitle("Mes activités")
+        .navigationTitle("Conversations")
 
         }
     
