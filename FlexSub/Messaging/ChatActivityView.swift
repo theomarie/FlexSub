@@ -28,13 +28,13 @@ struct ChatActivityView: View {
                     messages: viewModel.messages,
                     didSendMessage: { draft in
                            viewModel.sendMessage(text: draft.text, currentUserId: currentUserId)
-                       }                )
+                       })
                 .setAvailableInput(.textOnly)
             } else {
                 ProgressView()
             }
         }
-        .navigationBarTitle("Conversation", displayMode: .inline)
+       // .navigationBarTitle(viewModel.conversation?.title ?? "Conversation", displayMode: .inline)
     }
 }
 

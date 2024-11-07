@@ -35,10 +35,6 @@ struct ConversationListView: View {
 
         }
     
-       
-    
-
-    
 }
 
 struct ConversationRow: View {

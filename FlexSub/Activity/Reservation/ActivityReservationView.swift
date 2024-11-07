@@ -121,7 +121,7 @@ struct ActivityReservationView: View {
             print("Success")
             let user1 = ChatParticipant(id: user.id, name: user.username, avatarURL: user.profileImageUrl, isCurrentUser: false)
             
-            let userMessaging2 = ChatParticipant(id: user2.id, name: user2.username, avatarURL: user2.profileImageUrl, isCurrentUser: false)
+            let userMessaging2 = ChatParticipant(id: user2.id, name: user2.username, avatarURL: user2.profileImageUrl, isCurrentUser: true)
             
             
             Conversation.createChatBetweenUsers(user1: user1, user2: userMessaging2, activityTitle: reservationViewModel.activity.title, activityId: reservationViewModel.activity.id)
