@@ -24,33 +24,44 @@ struct UserView: View {
         VStack {
             // Vérifier si l'utilisateur est chargé
             if let user = authViewModel.currentUser {
-                HStack {
-                    Spacer()
-                    UserPicture()
-                        
-                    VStack {
-                        Text(" \(user.username)")
-                        Text("\(user.email)")
-                        NavigationLink(destination: ReviewView()) {
-                            Text("Voir les avis")
+                List{
+                    Section{
+                        HStack {
+                            
+                            UserPicture()
+                            
+                            VStack {
+                                Text(" \(user.username)")
+                                Text("\(user.email)")
+                            }
                         }
-                        
                     }
-                    Spacer()
+                    Section{
+                                NavigationLink(destination: ReviewView()) {
+                                    Text("\(Image(systemName: "ellipsis.message")) Voir les avis")
+                                }
+                                
+                        VStack {
+                            NavigationLink(destination: WalletView(authViewModel: authViewModel)) {
+                                Text("\(Image(systemName: "creditcard")) Portefeuille")
+                            }
+                        }
+                    }
                     
                     
+                    
+                    
+                        Section{
+                            
+                            Button("Déconnexion") {
+                                authViewModel.logout()
+                                
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    
                 }
-                Spacer()
-                VStack {
-                    NavigationLink(destination: WalletView(authViewModel: authViewModel)) {
-                        Text("Portefeuille")
-                    }
-                }
-                Spacer()
-
-                Button("Déconnexion") {
-                    authViewModel.logout()
-                }
+                
                 .toolbar {
                     NavigationLink(destination: UserEditView(authViewModel: authViewModel)) {
                         Label("Modifier le profil", systemImage: "pencil")

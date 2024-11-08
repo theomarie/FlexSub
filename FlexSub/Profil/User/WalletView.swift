@@ -12,7 +12,8 @@ struct WalletView: View {
     var body: some View {
         if let wallet = authViewModel.currentUser?.wallet {
             VStack {
-                
+    
+
                 List {
                     Section(header: Text("Cartes bleues")) {
                         ForEach(wallet.cartesBleues) { carte in

@@ -86,7 +86,7 @@ class User: Identifiable, ObservableObject, Equatable {
         self.lastName = lastName
         self.profileImageUrl = profileImageUrl
         self.address = address
-        self.wallet = Wallet(balance: 0, transactions: [])
+        self.wallet = Wallet(balance: 0)
     }
     
     

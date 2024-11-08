@@ -12,8 +12,10 @@ struct TransactionRow: View {
 
     var body: some View {
         HStack {
-            Text("\(transaction.amount)")
+            Text("\(transaction.amount, specifier: "%.2f")€")
+            Spacer()
             Text(transaction.date, style: .date)
+            Spacer()
             Text(transaction.description)
         }
     }
