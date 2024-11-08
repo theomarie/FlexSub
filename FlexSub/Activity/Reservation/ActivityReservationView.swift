@@ -13,7 +13,7 @@ struct ActivityReservationView: View {
     @Environment(\.dismiss) private var dismiss
     let activity: Activity
     @EnvironmentObject var authViewModel: AuthViewModel
-    @Environment(AuthViewModel.self) var authViewModel
+   
     let userId: String
     @State var userViewModel = UserViewModel()
     
@@ -150,7 +150,7 @@ struct ActivityReservationView: View {
 
 
 
-#Preview {
-    ActivityReservationView(reservationViewModel: ActivityReservationViewModel(activity: cinemaActivity, activitieState: .idle), userId: "345YyQQQH6QUvbd06USvbyFPApJ3")
-}
+//#Preview {
+//    ActivityReservationView(reservationViewModel: ActivityReservationViewModel(activity: cinemaActivity, activitieState: .idle), userId: "345YyQQQH6QUvbd06USvbyFPApJ3")
+//}
 

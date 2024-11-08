@@ -18,32 +18,33 @@ struct ContentView: View {
     
     
     var body: some View {
-            
-            TabView {
-                Tab("Activités", systemImage: "star") {
-                    NavigationStack {
-                        ActivitiesView(activitiesViewModel: activitiesViewModel)
-                    }
+        
+        TabView {
+            Tab("Activités", systemImage: "star") {
+                NavigationStack {
+                    ActivitiesView(activitiesViewModel: activitiesViewModel)
                 }
-                
-                Tab("Mes annonces", systemImage: "light.panel") {
-                    NavigationStack {
-                        MyAdsView(activitiesViewModel: activitiesViewModel)
-                    }
+            }
+
+            Tab("Mes annonces", systemImage: "light.panel") {
+                NavigationStack {
+                    MyAdsView(activitiesViewModel: activitiesViewModel)
                 }
-                Tab("Profil", systemImage: "person.crop.square") {
-                    NavigationStack {
-                        UserView()
-                    }
+            }
             Tab("Messagerie", systemImage: "message.fill") {
                 NavigationStack {
                     ConversationListView()
                 }
             }
-
+            
+            Tab("Profil", systemImage: "person.crop.square") {
+                NavigationStack {
+                    UserView()
                 }
-                
             }
+                
+            
+            
         }
         .onAppear {
             let tabBarAppearance = UITabBarAppearance()
@@ -52,8 +53,9 @@ struct ContentView: View {
             
         }
     }
-    
 }
+    
+
 
 
    

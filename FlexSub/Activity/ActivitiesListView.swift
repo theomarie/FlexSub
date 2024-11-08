@@ -48,7 +48,7 @@ struct ActivitiesListView: View {
             .listStyle(PlainListStyle())
         }
         .navigationDestination(item: $selectedActivity) { activity in
-            ActivityReservationView(reservationViewModel: ActivityReservationViewModel(activity: activity, activitieState: .idle), userId: activity.ownerId)
+            ActivityReservationView(reservationViewModel: ActivityReservationViewModel(activity: activity, activitieState: .idle), activity: activity, userId: activity.ownerId)
             
         }
     }

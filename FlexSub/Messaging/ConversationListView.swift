@@ -11,11 +11,12 @@ import ExyteChat
 struct ConversationListView: View {
     @StateObject private var viewModel: ConversationListViewModel
     @Environment(\.presentationMode) var presentationMode
-    @Environment(AuthViewModel.self) var authViewModel
+    @ObservedObject var authViewModel: AuthViewModel
 
     init() {
-        _viewModel = StateObject(wrappedValue: ConversationListViewModel())
-    }
+            _viewModel = StateObject(wrappedValue: ConversationListViewModel())
+            authViewModel = AuthViewModel() // Or initialize it here
+        }
 
     var body: some View {
         VStack {
