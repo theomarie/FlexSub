@@ -13,11 +13,12 @@ import FirebaseFirestore
 class User: Identifiable, ObservableObject, Equatable {
    
     var id: String
+    public let isCurrentUser: Bool = false
     var username: String
     var email: String
     var firstName: String
     var lastName: String
-    var profileImageUrl: String? = ""
+    var profileImageUrl: String? = "gs://flexsub-edf76.appspot.com/profile_images/fdsfsfe874894894894.jpg"
     var address: String
     var picture: UIImage?
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
@@ -95,6 +96,7 @@ class User: Identifiable, ObservableObject, Equatable {
         case firstName
         case lastName
         case address
+        case profileImageUrl
         
     }
     

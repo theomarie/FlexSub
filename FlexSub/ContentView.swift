@@ -31,18 +31,28 @@ struct ContentView: View {
                         MyAdsView(activitiesViewModel: activitiesViewModel)
                     }
                 }
-                
-                Tab("Messagerie", systemImage: "message.fill") {
-                    // Vue Messagerie
-                }
-
                 Tab("Profil", systemImage: "person.crop.square") {
                     NavigationStack {
                         UserView()
                     }
+            Tab("Messagerie", systemImage: "message.fill") {
+                NavigationStack {
+                    ConversationListView()
                 }
             }
+
+                }
+                
+            }
         }
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            
+        }
+    }
+    
 }
 
 

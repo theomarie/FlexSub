@@ -32,6 +32,7 @@ struct MyAdsView: View {
                 ActivitiesListView(activitiesViewModel: activitiesViewModel)
             }
         }
+        .padding()
         .navigationTitle("Mes activités")
         .toolbar {
             NavigationLink(destination: AddActivityFormView()) {

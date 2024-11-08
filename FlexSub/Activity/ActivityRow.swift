@@ -4,6 +4,7 @@ struct ActivityRow: View {
     var activity: Activity
 
     var body: some View {
+        
         HStack {
             // Affiche le logo : ressource || SF Symbol
                        if let uiImage = UIImage(named: activity.logo) {
@@ -46,10 +47,12 @@ struct ActivityRow: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     Spacer()
+                    
                     Text("\(String(format: "%.2f", activity.price))€")
                         .font(.headline)
                         .fontWeight(.bold)
                 }
+
             }
         }
         .padding(.vertical, 8)
