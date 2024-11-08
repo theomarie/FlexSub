@@ -26,15 +26,25 @@ struct UserView: View {
             if let user = authViewModel.currentUser {
                 HStack {
                     Spacer()
-                    UserPicture() // Passer l'utilisateur à UserPicture
+                    UserPicture()
+                        
                     VStack {
                         Text(" \(user.username)")
                         Text("\(user.email)")
                         NavigationLink(destination: ReviewView()) {
                             Text("Voir les avis")
                         }
+                        
                     }
                     Spacer()
+                    
+                    
+                }
+                Spacer()
+                VStack {
+                    NavigationLink(destination: WalletView(authViewModel: authViewModel)) {
+                        Text("Portefeuille")
+                    }
                 }
                 Spacer()
 

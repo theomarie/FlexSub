@@ -20,6 +20,7 @@ class User: Identifiable, ObservableObject, Equatable {
     var lastName: String
     var profileImageUrl: String? = "gs://flexsub-edf76.appspot.com/profile_images/fdsfsfe874894894894.jpg"
     var address: String
+    var wallet: Wallet
     var picture: UIImage?
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
@@ -85,6 +86,7 @@ class User: Identifiable, ObservableObject, Equatable {
         self.lastName = lastName
         self.profileImageUrl = profileImageUrl
         self.address = address
+        self.wallet = Wallet(balance: 0, transactions: [])
     }
     
     

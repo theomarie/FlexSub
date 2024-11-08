@@ -47,15 +47,16 @@ struct ConversationRow: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 60, height: 60) // voir comment ne pas mettre la taille de l'image en dur
+                    .frame(minWidth: 60, maxHeight: 60) // voir comment ne pas mettre la taille de l'image en dur
                     .cornerRadius(8)
             } else {
                 Image(systemName: conversation.logo) // Utilise SF Symbol
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 60, height: 60) // Possible reduire le code logique
+                    .frame(minWidth: 60, maxHeight: 60) // Possible reduire le code logique
                     .cornerRadius(8)
             }
+            
             Text(conversation.title)
                 .font(.headline)
             Spacer()

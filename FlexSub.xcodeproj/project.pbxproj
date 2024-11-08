@@ -15,7 +15,6 @@
 		F1C8D5442CCA7EDE0017E359 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D5432CCA7EDE0017E359 /* FirebaseFirestore */; };
 		F1C8D5462CCA7EDE0017E359 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D5452CCA7EDE0017E359 /* FirebaseMessaging */; };
 		F1C8D5482CCA7EDE0017E359 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D5472CCA7EDE0017E359 /* FirebaseStorage */; };
-		F1EBF52D2CDBA99400C873CF /* ExyteChat in Frameworks */ = {isa = PBXBuildFile; productRef = F1EBF52C2CDBA99400C873CF /* ExyteChat */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -424,11 +423,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		F1EBF52C2CDBA99400C873CF /* ExyteChat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F1EBF52B2CDBA99400C873CF /* XCRemoteSwiftPackageReference "Chat" */;
-			productName = ExyteChat;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
