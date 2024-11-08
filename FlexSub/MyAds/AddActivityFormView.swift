@@ -11,7 +11,7 @@ import FirebaseAuth
 struct AddActivityFormView: View {
     @State private var addressSearchViewModel = AddressSearchViewModel()
     @Environment(\.dismiss) var dismiss
-    @Environment(AuthViewModel.self) var authViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
     @State private var selectedCategory: Category = .all // Catégorie sélectionnée
     @State private var title: String = ""
@@ -108,7 +108,7 @@ struct AddActivityFormView: View {
     NavigationStack {
         AddActivityFormView()
             .environment(ActivitiesViewModel())
-            .environment(AuthViewModel())
+            .environmentObject(AuthViewModel())
     }
     .navigationTitle("Partager une activité")
     

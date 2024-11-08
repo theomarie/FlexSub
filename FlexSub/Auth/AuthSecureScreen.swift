@@ -10,7 +10,9 @@ import Firebase
 import FirebaseAuth
 
 struct AuthSecureScreen: View {
-    @Environment(AuthViewModel.self) var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+        
+    
     var userId: String? {
             Auth.auth().currentUser?.uid
         }
@@ -25,6 +27,7 @@ struct AuthSecureScreen: View {
                 } else {
                     // Lorsque le chargement est terminé, on affiche soit la Home, soit AuthView
                     if authViewModel.isLoggedIn {
+                        
                         ContentView()
                         
                     } else {

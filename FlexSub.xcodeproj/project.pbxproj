@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F116B1C92CDD08AD0084344A /* ExyteChat in Frameworks */ = {isa = PBXBuildFile; productRef = F116B1C82CDD08AD0084344A /* ExyteChat */; };
 		F1C8D53C2CCA7EDE0017E359 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53B2CCA7EDE0017E359 /* FirebaseAnalytics */; };
 		F1C8D53E2CCA7EDE0017E359 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53D2CCA7EDE0017E359 /* FirebaseAuth */; };
 		F1C8D5402CCA7EDE0017E359 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F1C8D53F2CCA7EDE0017E359 /* FirebaseCore */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F116B1C92CDD08AD0084344A /* ExyteChat in Frameworks */,
 				F1C8D5462CCA7EDE0017E359 /* FirebaseMessaging in Frameworks */,
 				F1C8D53C2CCA7EDE0017E359 /* FirebaseAnalytics in Frameworks */,
 				F1C8D5402CCA7EDE0017E359 /* FirebaseCore in Frameworks */,
@@ -89,6 +91,7 @@
 				F1C8D5432CCA7EDE0017E359 /* FirebaseFirestore */,
 				F1C8D5452CCA7EDE0017E359 /* FirebaseMessaging */,
 				F1C8D5472CCA7EDE0017E359 /* FirebaseStorage */,
+				F116B1C82CDD08AD0084344A /* ExyteChat */,
 			);
 			productName = FlexSub;
 			productReference = 247474332CC918CF00C2B364 /* FlexSub.app */;
@@ -120,6 +123,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F116B1C72CDD08AD0084344A /* XCRemoteSwiftPackageReference "Chat" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 247474342CC918CF00C2B364 /* Products */;
@@ -282,6 +286,7 @@
 				DEVELOPMENT_TEAM = ZFGP3C98U7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -314,6 +319,7 @@
 				DEVELOPMENT_TEAM = ZFGP3C98U7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -367,9 +373,22 @@
 				minimumVersion = 11.4.0;
 			};
 		};
+		F116B1C72CDD08AD0084344A /* XCRemoteSwiftPackageReference "Chat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/Chat.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F116B1C82CDD08AD0084344A /* ExyteChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F116B1C72CDD08AD0084344A /* XCRemoteSwiftPackageReference "Chat" */;
+			productName = ExyteChat;
+		};
 		F1C8D53B2CCA7EDE0017E359 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 247474442CC91C4900C2B364 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

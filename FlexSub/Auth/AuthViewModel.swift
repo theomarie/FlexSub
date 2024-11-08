@@ -10,10 +10,10 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-@Observable class AuthViewModel {
+class AuthViewModel: ObservableObject {
+    @Published var currentUser: User?
     var isLoggedIn: Bool = false
     var isLoading: Bool = true
-    var currentUser: User?
     var errorMessage: String = ""
     private var imageCache: [String: UIImage] = [:] // Cache pour les images
 
@@ -39,6 +39,7 @@ import FirebaseStorage
        
             isLoading = false
         }
+    
     
     func login(email: String, password: String) {
         AuthManager.shared.loginUser(email: email, password: password) { result in
@@ -169,11 +170,14 @@ import FirebaseStorage
                 profileImageUrl: profileImageUrl,
                 address: address
             )
-            
-            self.currentUser = user // Mettre à jour l'utilisateur actuel
+            DispatchQueue.main.async {
+                            self.currentUser = user
+                        }
             return user
         }
     }
+    
+    
     
     func uploadProfileImage(_ imageData: Data, userId: String) async throws -> String {
         let storageRef = Storage.storage().reference().child("profileImages/\(userId).jpg")
@@ -186,7 +190,61 @@ import FirebaseStorage
         // Obtenir l'URL de téléchargement
         return try await storageRef.downloadURL().absoluteString
     }
-}
+  
+
+        func usernameBinding() -> Binding<String> {
+            Binding<String>(
+                get: { self.currentUser?.username ?? "" },
+                set: { self.currentUser?.username = $0 }
+            )
+        }
+
+        func emailBinding() -> Binding<String> {
+            Binding<String>(
+                get: { self.currentUser?.email ?? "" },
+                set: { self.currentUser?.email = $0 }
+            )
+        }
+
+        func firstNameBinding() -> Binding<String> {
+            Binding<String>(
+                get: { self.currentUser?.firstName ?? "" },
+                set: { self.currentUser?.firstName = $0 }
+            )
+        }
+
+        func lastNameBinding() -> Binding<String> {
+            Binding<String>(
+                get: { self.currentUser?.lastName ?? "" },
+                set: { self.currentUser?.lastName = $0 }
+            )
+        }
+
+        func addressBinding() -> Binding<String> {
+            Binding<String>(
+                get: { self.currentUser?.address ?? "" },
+                set: { self.currentUser?.address = $0 }
+            )
+        }
+    func updateUserProfileImage(_ image: UIImage) {
+            // Mettre à jour l'image de l'utilisateur dans currentUser
+            currentUser?.picture = image
+        }
+    
+    func updateUser(_ user: User) {
+            // S'assurer que la mise à jour de 'currentUser' se fait sur le thread principal
+            DispatchQueue.main.async {
+                self.currentUser = user
+            }
+        }
+    func saveChanges(user: User) {
+        // Logique pour sauvegarder les modifications dans Firestore...
+
+        // Mettre à jour currentUser après la sauvegarde
+        self.currentUser = user
+    }
+    }
+
 
 
 

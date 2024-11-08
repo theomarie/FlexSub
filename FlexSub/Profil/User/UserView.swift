@@ -14,16 +14,16 @@ import FirebaseAuth
 import SwiftUI
 
 struct UserView: View {
-    @Environment(AuthViewModel.self) var viewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showEditForm = false
-    
+    @State private var refreshView = false
 
    
 
     var body: some View {
         VStack {
             // Vérifier si l'utilisateur est chargé
-            if let user = viewModel.currentUser {
+            if let user = authViewModel.currentUser {
                 HStack {
                     Spacer()
                     UserPicture() // Passer l'utilisateur à UserPicture
@@ -39,22 +39,25 @@ struct UserView: View {
                 Spacer()
 
                 Button("Déconnexion") {
-                    viewModel.logout()
+                    authViewModel.logout()
                 }
                 .toolbar {
-                    NavigationLink(destination: UserEditFormView(user: user)) {
+                    NavigationLink(destination: UserEditView(authViewModel: authViewModel)) {
                         Label("Modifier le profil", systemImage: "pencil")
                     }
                 }
                 .navigationTitle("Profil")
-            } else {
-                // Afficher un indicateur de chargement pendant le chargement de l'utilisateur
-                ProgressView()
+            
             }
         }
         .onAppear {
-            // Charger l'utilisateur depuis viewModel
+            refreshView = true
+            
         }
+        .onChange(of: authViewModel.currentUser) { _, _ in
+                refreshView.toggle()
+            }
+        
     }
 }
         

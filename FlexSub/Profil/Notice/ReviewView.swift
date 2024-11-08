@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ReviewView: View {
-    @Environment(AuthViewModel.self) var viewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     
     var body: some View {

@@ -12,7 +12,7 @@ import PhotosUI
 
 struct RegisterView: View {
     // MARK: - Properties
-    @Environment(AuthViewModel.self) var authViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
     @State private var selectedItem: PhotosPickerItem?
     @State private var profileImage: Image?
@@ -207,7 +207,7 @@ struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             RegisterView()
-                .environment(AuthViewModel())
+                .environmentObject(AuthViewModel())
         }
     }
 }

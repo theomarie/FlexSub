@@ -21,6 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct FlexSubApp: App {
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
    
@@ -30,8 +31,9 @@ struct FlexSubApp: App {
         
         WindowGroup {
             AuthSecureScreen()
-                .environment(AuthViewModel())
+                .environmentObject(AuthViewModel())
                 .environment(ActivitiesViewModel())
+            
             
                
         }

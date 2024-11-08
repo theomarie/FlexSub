@@ -12,7 +12,7 @@ import FirebaseAuth
 
 struct ContentView: View {
     // environnement de mon activites
-    @Environment(AuthViewModel.self) var authViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
     
     

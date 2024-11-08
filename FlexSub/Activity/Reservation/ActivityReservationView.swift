@@ -10,7 +10,7 @@ import MapKit
 
 struct ActivityReservationView: View {
     let activity: Activity
-    @Environment(AuthViewModel.self) var authViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     let userId: String
     @State var userViewModel = UserViewModel()
     

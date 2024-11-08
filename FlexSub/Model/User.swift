@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 
-class User: Identifiable, ObservableObject {
+class User: Identifiable, ObservableObject, Equatable {
    
     var id: String
     var username: String
@@ -19,6 +19,7 @@ class User: Identifiable, ObservableObject {
     var lastName: String
     var profileImageUrl: String? = ""
     var address: String
+    var picture: UIImage?
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
 
@@ -57,7 +58,10 @@ class User: Identifiable, ObservableObject {
                return User(id: id, username: username, email: email, firstName: firstName, lastName: lastName, profileImageUrl: profileImageUrl, address: address)
            }
        }
-    
+    static func == (lhs: User, rhs: User) -> Bool {
+            return lhs.id == rhs.id // Compare les identifiants uniques
+            // Et/ou d'autres propriétés importantes pour l'égalité
+        }
     
     
     static func sampleData() -> [User] {

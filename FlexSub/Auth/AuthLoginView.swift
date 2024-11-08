@@ -16,7 +16,7 @@ struct AuthLoginView: View {
     @State private var isRegistering: Bool = false
     @State private var errorMessage: String = ""
     @State private var isShowingError = false
-    @Environment(AuthViewModel.self) var authViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     
     var body: some View {
@@ -83,7 +83,7 @@ struct AuthLoginView: View {
     }
 }
 
-#Preview {
-    AuthLoginView()
-        .environment(AuthViewModel())
-}
+//#Preview {
+//    AuthLoginView()
+//        .environment(AuthViewModel())
+//}
