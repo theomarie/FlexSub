@@ -4,6 +4,7 @@ struct ActivityRow: View {
     var activity: Activity
 
     var body: some View {
+        
         HStack {
             // Affiche le logo : ressource || SF Symbol
                        if let uiImage = UIImage(named: activity.logo) {
@@ -46,10 +47,12 @@ struct ActivityRow: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     Spacer()
+                    
                     Text("\(String(format: "%.2f", activity.price))€")
                         .font(.headline)
                         .fontWeight(.bold)
                 }
+
             }
         }
         .padding(.vertical, 8)
@@ -68,10 +71,9 @@ let ownerUser = User(
     id: UUID().uuidString,
     username: "Stéphane",
     email: "Dupont",
-    password: "Stéphane",
     firstName: "stephane@example.com",
     lastName: "password123",
-    picture: UIImage(resource: .user1),
+    profileImageUrl: "",
     address: "123 rue de paris"
 )
 

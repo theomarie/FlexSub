@@ -7,7 +7,7 @@
 import SwiftUI
 import MapKit
 
-struct Address: Identifiable, Codable {
+struct Address: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     let streetAddress: String
     let city: String

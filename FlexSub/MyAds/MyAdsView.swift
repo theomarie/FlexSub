@@ -11,11 +11,7 @@ import FirebaseAuth
 struct MyAdsView: View {
     @Bindable var activitiesViewModel: ActivitiesViewModel
     var user = Auth.auth().currentUser
-    /*
-     Variable pour le test d'affichage conditionnel.
-     A remplacer plus tard par le nombre d'éléments du tableau myActivities
-     */    
-    @State var showAddingField: Bool = false
+
     
     var body: some View {
         VStack{
@@ -36,6 +32,7 @@ struct MyAdsView: View {
                 ActivitiesListView(activitiesViewModel: activitiesViewModel)
             }
         }
+        .padding()
         .navigationTitle("Mes activités")
         .toolbar {
             NavigationLink(destination: AddActivityFormView()) {
@@ -52,6 +49,7 @@ struct MyAdsView: View {
 #Preview {
     NavigationStack {
         MyAdsView(activitiesViewModel: ActivitiesViewModel())
+            .navigationTitle("Mes activités")
     }
     
 }

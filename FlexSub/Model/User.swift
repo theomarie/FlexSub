@@ -7,41 +7,50 @@
 
 
 import SwiftUI
+import FirebaseFirestore
 
-class User: Identifiable {
+
+class User: Identifiable, Equatable {
     var id: String
+    public let isCurrentUser: Bool = false
     var username: String
     var email: String
-    var password: String
     var firstName: String
     var lastName: String
-    var picture: UIImage?
+    var profileImageUrl: String? = "gs://flexsub-edf76.appspot.com/profile_images/fdsfsfe874894894894.jpg"
     var address: String
     var reviews: [Review] = []  // Liste des avis pour cet utilisateur
   //  var phone: String? voir peut etre un protocol pour la gestion des numéros
-    
-    
-    
-    static func sampleData() -> [User] {
-           return [
-            User(id:  UUID().uuidString, username: "john_doe", email: "john.doe@example.com", password: "password123", firstName: "John", lastName: "Doe", picture: UIImage(systemName: "person.fill"), address: "123 Main St, Paris, France"),
-            User(id:  UUID().uuidString, username: "jane_smith", email: "jane.smith@example.com", password: "password123", firstName: "Jane", lastName: "Smith", picture: UIImage(systemName: "person.fill"), address: "456 Elm St, Lyon, France"),
-            User(id:  UUID().uuidString, username: "mike_jones", email: "mike.jones@example.com", password: "password123", firstName: "Mike", lastName: "Jones", picture: UIImage(systemName: "person.fill"), address: "789 Oak St, Bordeaux, France"),
-            User(id:  UUID().uuidString, username: "emma_williams", email: "emma.williams@example.com", password: "password123", firstName: "Emma", lastName: "Williams", picture: UIImage(systemName: "person.fill"), address: "321 Maple St, Lille, France"),
-            User(id:  UUID().uuidString, username: "lucas_brown", email: "lucas.brown@example.com", password: "password123", firstName: "Lucas", lastName: "Brown", picture: UIImage(systemName: "person.fill"), address: "654 Pine St, Nice, France")
-           ]
+
+    var userImage: UserImage {
+           get {
+               UserImage(url: profileImageUrl)
+           }
+           set {
+               profileImageUrl = newValue.url
+           }
        }
     
-    init(id: String, username: String, email: String, password: String, firstName: String, lastName: String, picture: UIImage? = nil, address: String) {
+    static func == (lhs: User, rhs: User) -> Bool {
+           return lhs.id == rhs.id &&
+                  lhs.username == rhs.username &&
+                  lhs.email == rhs.email
+   }
+    
+    
+   
+    
+    
+    init(id: String, username: String, email: String, firstName: String, lastName: String, profileImageUrl: String?, address: String) {
         self.id = id
         self.username = username
         self.email = email
-        self.password = password
         self.firstName = firstName
         self.lastName = lastName
-        self.picture = picture
+        self.profileImageUrl = profileImageUrl
         self.address = address
     }
+    
     
     
     enum CodingKeys: String, CodingKey {
@@ -51,6 +60,7 @@ class User: Identifiable {
         case firstName
         case lastName
         case address
+        case profileImageUrl
         
     }
     

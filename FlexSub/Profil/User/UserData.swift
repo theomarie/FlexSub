@@ -8,11 +8,11 @@
 import SwiftUI
 
 class UserData: ObservableObject {
-    @Published var user: User = User(id: UUID().uuidString, username: "", email: "", password: "", firstName: "", lastName: "", address: "")
+    @Published var user: User = User(id: UUID().uuidString, username: "", email: "", firstName: "", lastName: "", profileImageUrl: "", address: "")
     @Published var inputImage: UIImage?
     
     init() {
-        self.user = User(id: UUID().uuidString, username: "Eikichi", email: "user@example.com", password: "motdepasse", firstName: "Abdel", lastName: "Ghani", address: "123 Rue Principale")
+        self.user = User(id: UUID().uuidString, username: "Eikichi", email: "user@example.com",  firstName: "Abdel", lastName: "Ghani", profileImageUrl: "", address: "123 Rue Principale")
         
             // Création des instances de Review (à adapter avec des ID valides)
         /*

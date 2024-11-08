@@ -21,7 +21,7 @@ struct UserEditFormView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                UserPicture(image: $userData.inputImage)
+              //  UserPicture(image: $userData.inputImage)
                 
                 TextField("Nom d'utilisateur", text: $user.username)
                     .padding()
@@ -35,12 +35,14 @@ struct UserEditFormView: View {
                     .cornerRadius(12)
                     .shadow(radius: 3)
                     .padding(.bottom, 10)
+                /*
                 SecureField("Mot de passe", text: $user.password)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(radius: 3)
                     .padding(.bottom, 10)
+                 */
                 TextField("Prénom", text: $user.firstName)
                     .padding()
                     .background(Color.white)
@@ -83,6 +85,6 @@ struct UserEditFormView: View {
     }
     
     func saveChanges() {
-        user.picture = userData.inputImage
+        //user.picture = userData.inputImage
     }
 }

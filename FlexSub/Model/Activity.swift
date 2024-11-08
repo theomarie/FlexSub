@@ -8,13 +8,12 @@
 
 import SwiftUI
 
-struct Activity: Identifiable, Codable {
+struct Activity: Identifiable, Codable, Hashable {
     let id:  String
     var title: String
     var status: Status = .published
-    //var owner: User.ID
     var ownerId: String
-    var participant: User.ID?
+    var participantid: String?
     var price: Double = 0
     var date: Date
     var category: Category = .all // Revoir plus tard
@@ -40,6 +39,9 @@ struct Activity: Identifiable, Codable {
                 return "star.fill" // Icône par défaut pour "Tous"
             }
         }
+    
+    
+    
 }
 
 

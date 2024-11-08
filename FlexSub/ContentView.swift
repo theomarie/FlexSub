@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 
 
 
@@ -14,44 +14,55 @@ struct ContentView: View {
     // environnement de mon activites
     @Environment(AuthViewModel.self) var authViewModel
     @Environment(ActivitiesViewModel.self) var activitiesViewModel
-
     
     // code Abdelghani
     @StateObject var userData = UserData()
     // Fin du code
     
     var body: some View {
+        
         TabView {
             Tab("Activités", systemImage: "star") {
-                NavigationStack() {
+                NavigationStack {
                     ActivitiesView(activitiesViewModel: activitiesViewModel)
                 }
             }
             
             Tab("Mes annonces", systemImage: "light.panel") {
-                NavigationStack() {
+                NavigationStack {
                     MyAdsView(activitiesViewModel: activitiesViewModel)
                 }
             }
             
             Tab("Messagerie", systemImage: "message.fill") {
-                // Vue Messagerie
-            }
-
-            Tab("Profil", systemImage: "person.crop.square") {
-                Button("Logout") {
-                    authViewModel.logout()
+                NavigationStack {
+                    ConversationListView()
                 }
             }
+            
+            Tab("Profil", systemImage: "person.crop.square") {
+                NavigationStack {
+                    Button("Logout") {
+                        authViewModel.logout()
+                    }
+                }
+                
+            }
         }
-       
-       
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            
+        }
     }
+    
 }
-   
+
+
 
 #Preview {
-  
+    
     ContentView()
-     
+    
 }

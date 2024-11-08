@@ -10,10 +10,10 @@
 
 
 enum Status: String, Statutes, Codable {
-    case published = "Publier"
-    case inProgress = "En cours"
-    case awaiting = "En attente"
-    case fineshed = "Terminé"
+    case published = "published"
+    case inProgress = "inProgress"
+    case awaiting = "awaiting"
+    case fineshed = "fineshed"
 
     var name: String {
         return self.rawValue
